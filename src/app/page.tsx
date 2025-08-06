@@ -13,18 +13,22 @@ import {
   Database,
   Cloud,
   Zap,
+  Menu,
+  X,
 } from "lucide-react";
 import Image from "next/image";
 import ContactForm from "@/components/contact-form";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("hero");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
 
   // Add progress bar at the top of the page
   useEffect(() => {
     const progressBar = document.createElement("div");
-    progressBar.className = "fixed top-0 left-0 right-0 h-1 bg-blue-500 z-50 transform origin-left";
+    progressBar.className =
+      "fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 z-50 transform origin-left";
     document.body.appendChild(progressBar);
 
     return () => {
@@ -37,7 +41,14 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "skills", "experience", "projects", "contact"];
+      const sections = [
+        "hero",
+        "about",
+        "skills",
+        "experience",
+        "projects",
+        "contact",
+      ];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -64,7 +75,17 @@ export default function Portfolio() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    setIsMenuOpen(false);
   };
+
+  const navItems = [
+    { id: "hero", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
+    { id: "experience", label: "Experience" },
+    { id: "projects", label: "Projects" },
+    { id: "contact", label: "Contact" },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-900 text-white overflow-x-hidden">
@@ -90,47 +111,151 @@ export default function Portfolio() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </div>
 
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+      {/* Enhanced Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-xl border-b border-gray-700/50 shadow-2xl">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="flex justify-between items-center py-6">
+            {/* Logo/Brand */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              transition={{ duration: 0.6 }}
+              className="flex items-center space-x-3"
             >
-              Adesh Yearanty
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">A</span>
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Adesh Yearanty
+              </span>
             </motion.div>
-            <div className="hidden md:flex space-x-8">
-              {[
-                "hero",
-                "about",
-                "skills",
-                "experience",
-                "projects",
-                "contact",
-              ].map((section) => (
-                <button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  className={`capitalize transition-colors duration-300 ${
-                    activeSection === section
-                      ? "text-blue-400"
-                      : "text-gray-300 hover:text-white"
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-1">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.id}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`relative px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                    activeSection === item.id
+                      ? "text-white bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30"
+                      : "text-gray-300 hover:text-white hover:bg-gray-800/50"
                   }`}
                 >
-                  {section === "hero" ? "Home" : section}
-                </button>
+                  {item.label}
+                  {activeSection === item.id && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-400/20"
+                      initial={false}
+                      transition={{
+                        type: "spring",
+                        bounce: 0.2,
+                        duration: 0.6,
+                      }}
+                    />
+                  )}
+                </motion.button>
               ))}
             </div>
+
+            {/* Social Links & Mobile Menu */}
+            <div className="flex items-center space-x-4">
+              {/* Social Links - Hidden on mobile */}
+              <div className="hidden sm:flex items-center space-x-3">
+                <motion.a
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  href="https://github.com/adeshyearanty"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 bg-gray-800/80 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                >
+                  <Github className="w-5 h-5" />
+                </motion.a>
+                <motion.a
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                  href="mailto:adesh.yearanty@gmail.com"
+                  className="w-11 h-11 bg-gray-800/80 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                >
+                  <Mail className="w-5 h-5" />
+                </motion.a>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="lg:hidden w-11 h-11 bg-gray-800/80 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 rounded-full flex items-center justify-center transition-all duration-300"
+              >
+                {isMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </motion.button>
+            </div>
           </div>
+
+          {/* Mobile Menu */}
+          <motion.div
+            initial={false}
+            animate={{
+              height: isMenuOpen ? "auto" : 0,
+              opacity: isMenuOpen ? 1 : 0,
+            }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden overflow-hidden border-t border-gray-700/50"
+          >
+            <div className="py-6 space-y-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`block w-full text-left px-6 py-4 rounded-lg font-medium transition-all duration-300 ${
+                    activeSection === item.id
+                      ? "text-white bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30"
+                      : "text-gray-300 hover:text-white hover:bg-gray-800/50"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+
+              {/* Mobile Social Links */}
+              <div className="flex items-center justify-center space-x-4 pt-4 border-t border-gray-700/50 mt-4">
+                <a
+                  href="https://github.com/adeshyearanty"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 bg-gray-800/80 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 rounded-full flex items-center justify-center transition-all duration-300"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
+                <a
+                  href="mailto:adesh.yearanty@gmail.com"
+                  className="w-11 h-11 bg-gray-800/80 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 rounded-full flex items-center justify-center transition-all duration-300"
+                >
+                  <Mail className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </nav>
 
       {/* Hero Section */}
       <section
         id="hero"
-        className="relative min-h-screen flex items-center justify-center"
+        className="relative min-h-screen flex items-center justify-center pt-24"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -201,13 +326,13 @@ export default function Portfolio() {
               href="https://github.com/adeshyearanty"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors duration-300"
+              className="p-4 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110"
             >
               <Github className="w-6 h-6" />
             </a>
             <a
               href="mailto:adesh.yearanty@gmail.com"
-              className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors duration-300"
+              className="p-4 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110"
             >
               <Mail className="w-6 h-6" />
             </a>
