@@ -68,66 +68,68 @@ export async function sendContactFormEmail(formData: {
   phone?: string;
   company?: string;
 }) {
-  const emailHtml = `
+  // 📩 Template for Admin (You)
+  const adminHtml = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
       <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
         <h1 style="color: white; margin: 0; font-size: 28px;">New Contact Form Submission</h1>
       </div>
-      
-      <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-        <div style="margin-bottom: 20px;">
-          <h3 style="color: #333; margin-bottom: 10px; border-bottom: 2px solid #667eea; padding-bottom: 5px;">Contact Information</h3>
-          <p style="margin: 8px 0;"><strong>Name:</strong> ${formData.name}</p>
-          <p style="margin: 8px 0;"><strong>Email:</strong> <a href="mailto:${
-            formData.email
-          }" style="color: #667eea;">${formData.email}</a></p>
-          ${
-            formData.phone
-              ? `<p style="margin: 8px 0;"><strong>Phone:</strong> ${formData.phone}</p>`
-              : ""
-          }
-          ${
-            formData.company
-              ? `<p style="margin: 8px 0;"><strong>Company:</strong> ${formData.company}</p>`
-              : ""
-          }
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-          <h3 style="color: #333; margin-bottom: 10px; border-bottom: 2px solid #667eea; padding-bottom: 5px;">Subject</h3>
-          <p style="margin: 8px 0; font-size: 16px; color: #555;">${
-            formData.subject
-          }</p>
-        </div>
-        
-        <div>
-          <h3 style="color: #333; margin-bottom: 10px; border-bottom: 2px solid #667eea; padding-bottom: 5px;">Message</h3>
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea;">
-            <p style="margin: 0; line-height: 1.6; color: #555; white-space: pre-wrap;">${
-              formData.message
-            }</p>
-          </div>
-        </div>
-        
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center;">
-          <p style="color: #888; font-size: 14px; margin: 0;">
-            This email was sent from your portfolio contact form.<br>
-            Received on ${new Date().toLocaleString()}
-          </p>
-        </div>
+      <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px;">
+        <h3>Contact Information</h3>
+        <p><strong>Name:</strong> ${formData.name}</p>
+        <p><strong>Email:</strong> ${formData.email}</p>
+        ${
+          formData.phone
+            ? `<p><strong>Phone:</strong> ${formData.phone}</p>`
+            : ""
+        }
+        ${
+          formData.company
+            ? `<p><strong>Company:</strong> ${formData.company}</p>`
+            : ""
+        }
+        <h3>Subject</h3>
+        <p>${formData.subject}</p>
+        <h3>Message</h3>
+        <p style="white-space: pre-wrap;">${formData.message}</p>
+        <hr />
+        <p style="font-size: 12px; color: gray;">Received on ${new Date().toLocaleString()}</p>
       </div>
     </div>
   `;
 
+  // 📩 Template for User (Confirmation)
+  const userHtml = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f3f3f3;">
+      <div style="background-color: #667eea; padding: 25px; text-align: center; border-radius: 10px 10px 0 0;">
+        <h1 style="color: white; margin: 0;">Thank You, ${formData.name}!</h1>
+      </div>
+      <div style="background-color: white; padding: 25px; border-radius: 0 0 10px 10px;">
+        <p>We’ve received your message regarding <strong>${
+          formData.subject
+        }</strong>.</p>
+        <p>Here’s a copy of your message:</p>
+        <blockquote style="border-left: 4px solid #667eea; padding-left: 10px; margin: 10px 0; color: #555;">
+          ${formData.message}
+        </blockquote>
+        <p>We’ll get back to you as soon as possible. Stay connected!</p>
+        <hr />
+        <p style="font-size: 12px; color: gray; text-align: center;">Sent from Adesh Yearanty’s Portfolio • ${new Date().toLocaleDateString()}</p>
+      </div>
+    </div>
+  `;
+
+  // Send to yourself
   await sendMail({
     sendTo: SMTP_SERVER_USERNAME,
     subject: `Portfolio Contact: ${formData.subject}`,
-    html: emailHtml,
+    html: adminHtml,
   });
 
+  // Send confirmation to user
   return await sendMail({
     sendTo: formData.email,
-    subject: `Portfolio Contact: ${formData.subject}`,
-    html: emailHtml,
+    subject: `Thanks for contacting me, ${formData.name}!`,
+    html: userHtml,
   });
 }
