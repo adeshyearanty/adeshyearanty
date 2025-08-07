@@ -2,6 +2,7 @@
 
 import { motion, useScroll } from "framer-motion";
 import {
+  Building,
   ChevronDown,
   Cloud,
   Code,
@@ -26,8 +27,12 @@ export default function Portfolio() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
+    phone: "",
+    company: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
   const { scrollYProgress } = useScroll();
@@ -1068,6 +1073,70 @@ export default function Portfolio() {
                       required
                       className="w-full pl-12 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                       placeholder="Enter your email"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Subject
+                  </label>
+                  <div className="relative">
+                    <MessageSquare className="absolute left-3 top-4 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-12 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+                      placeholder="What's this about?"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Phone (optional)
+                  </label>
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full pl-12 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="company"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Company (optional)
+                  </label>
+                  <div className="relative">
+                    <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className="w-full pl-12 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Enter your company name"
                     />
                   </div>
                 </div>
