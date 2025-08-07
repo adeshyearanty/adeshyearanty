@@ -1,27 +1,35 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
 import {
   ChevronDown,
-  Github,
-  Mail,
-  Phone,
-  MapPin,
-  ExternalLink,
+  Cloud,
   Code,
   Database,
-  Cloud,
-  Zap,
+  ExternalLink,
+  Github,
+  Mail,
+  MapPin,
   Menu,
+  MessageSquare,
+  Phone,
+  Send,
+  User,
   X,
+  Zap,
 } from "lucide-react";
-import Image from "next/image";
-import ContactForm from "@/components/contact-form";
+import { useEffect, useState } from "react";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("hero");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("");
   const { scrollYProgress } = useScroll();
 
   // Add progress bar at the top of the page
@@ -31,11 +39,15 @@ export default function Portfolio() {
       "fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 z-50 transform origin-left";
     document.body.appendChild(progressBar);
 
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
+      progressBar.style.transform = `scaleX(${latest})`;
+    });
+
     return () => {
-      scrollYProgress.on("change", (latest) => {
-        progressBar.style.transform = `scaleX(${latest})`;
-      });
-      document.body.removeChild(progressBar);
+      unsubscribe();
+      if (document.body.contains(progressBar)) {
+        document.body.removeChild(progressBar);
+      }
     };
   }, [scrollYProgress]);
 
@@ -49,7 +61,7 @@ export default function Portfolio() {
         "projects",
         "contact",
       ];
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 120; // Increased offset to account for nav height
 
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -70,12 +82,49 @@ export default function Portfolio() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const navHeight = 100; // Account for fixed nav height
+      const elementPosition = element.offsetTop - navHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      });
     }
     setIsMenuOpen(false);
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        setSubmitStatus("success");
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const navItems = [
@@ -252,101 +301,207 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Redesigned */}
       <section
         id="hero"
         className="relative min-h-screen flex items-center justify-center pt-24"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-8"
-          >
-            <div className="relative w-48 h-48 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse" />
-              <Image
-                src="/Photo.jpg"
-                alt="Adesh Yearanty"
-                width={192}
-                height={192}
-                className="relative rounded-full w-full h-full object-cover border-4 border-gray-800"
-              />
-            </div>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold mb-6"
-          >
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Yearanty Sri Sai Adesh
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
-          >
-            Full-Stack Developer & Computer Science Engineer
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-4 mb-12"
-          >
-            <div className="flex items-center gap-2 text-gray-300">
-              <MapPin className="w-5 h-5" />
-              <span>Hyderabad, Telangana, India</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-300">
-              <Mail className="w-5 h-5" />
-              <span>adesh.yearanty@gmail.com</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-300">
-              <Phone className="w-5 h-5" />
-              <span>+91 97000 15263</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex justify-center gap-6 mb-12"
-          >
-            <a
-              href="https://github.com/adeshyearanty"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-4 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110"
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Text content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
             >
-              <Github className="w-6 h-6" />
-            </a>
-            <a
-              href="mailto:adesh.yearanty@gmail.com"
-              className="p-4 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110"
-            >
-              <Mail className="w-6 h-6" />
-            </a>
-          </motion.div>
+              <div>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="text-lg text-blue-400 font-medium mb-4"
+                >
+                  Hello, I'm
+                </motion.p>
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="text-4xl md:text-6xl font-bold mb-4"
+                >
+                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Yearanty Sri
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                    Sai Adesh
+                  </span>
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="text-xl md:text-2xl text-gray-300 mb-6"
+                >
+                  Full-Stack Developer & Computer Science Engineer
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="text-lg text-gray-400 leading-relaxed max-w-xl"
+                >
+                  Passionate about creating scalable web solutions with modern
+                  technologies. Currently leading CRM development at Miraki
+                  Technologies.
+                </motion.p>
+              </div>
 
-          <motion.button
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="flex flex-wrap gap-4 text-sm text-gray-300"
+              >
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-blue-400" />
+                  <span>Hyderabad, India</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-purple-400" />
+                  <span>adesh.yearanty@gmail.com</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-green-400" />
+                  <span>+91 97000 15263</span>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="flex flex-wrap gap-4"
+              >
+                <button
+                  onClick={() => scrollToSection("projects")}
+                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                >
+                  View My Work
+                </button>
+                <button
+                  onClick={() => scrollToSection("contact")}
+                  className="px-8 py-4 border-2 border-gray-600 rounded-full text-white font-semibold hover:border-blue-400 hover:text-blue-400 transition-all duration-300"
+                >
+                  Let's Connect
+                </button>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="flex gap-4"
+              >
+                <a
+                  href="https://github.com/adeshyearanty"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110 flex items-center justify-center"
+                >
+                  <Github className="w-6 h-6" />
+                </a>
+                <a
+                  href="mailto:adesh.yearanty@gmail.com"
+                  className="w-12 h-12 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110 flex items-center justify-center"
+                >
+                  <Mail className="w-6 h-6" />
+                </a>
+              </motion.div>
+            </motion.div>
+
+            {/* Right side - Image and stats */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="relative"
+            >
+              <div className="relative z-10">
+                {/* Main image container */}
+                <div className="relative w-80 h-80 mx-auto">
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 rotate-6 transform"></div>
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 -rotate-6 transform"></div>
+                  <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gray-800 border-2 border-gray-700">
+                    <img
+                      src="/Photo.jpg"
+                      alt="Yearanty Sri Sai Adesh"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent"></div>
+                  </div>
+                </div>
+
+                {/* Floating stats cards */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 1 }}
+                  className="absolute -top-4 -left-4 bg-gray-800/90 backdrop-blur-sm rounded-xl p-4 border border-gray-700 shadow-lg"
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-400">9.28</div>
+                    <div className="text-xs text-gray-400">CGPA</div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 1.2 }}
+                  className="absolute -bottom-4 -right-4 bg-gray-800/90 backdrop-blur-sm rounded-xl p-4 border border-gray-700 shadow-lg"
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-purple-400">
+                      2025
+                    </div>
+                    <div className="text-xs text-gray-400">Graduate</div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 1.4 }}
+                  className="absolute top-1/2 -left-8 transform -translate-y-1/2 bg-gray-800/90 backdrop-blur-sm rounded-xl p-4 border border-gray-700 shadow-lg"
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-green-400">
+                      Full-Stack
+                    </div>
+                    <div className="text-xs text-gray-400">Developer</div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Scroll indicator */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            onClick={() => scrollToSection("about")}
-            className="animate-bounce"
+            transition={{ duration: 0.8, delay: 1.5 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           >
-            <ChevronDown className="w-8 h-8 text-blue-400" />
-          </motion.button>
+            <button
+              onClick={() => scrollToSection("about")}
+              className="animate-bounce flex flex-col items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-300"
+            >
+              <span className="text-sm">Scroll Down</span>
+              <ChevronDown className="w-6 h-6" />
+            </button>
+          </motion.div>
         </div>
       </section>
 
@@ -862,7 +1017,114 @@ export default function Portfolio() {
               </div>
             </motion.div>
 
-            <ContactForm />
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700"
+            >
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Your Name
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-12 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Enter your name"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-12 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Message
+                  </label>
+                  <div className="relative">
+                    <MessageSquare className="absolute left-3 top-4 w-5 h-5 text-gray-400" />
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      required
+                      rows={5}
+                      className="w-full pl-12 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+                      placeholder="Tell me about your project or just say hello!"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg text-white font-semibold hover:from-blue-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Send Message
+                    </>
+                  )}
+                </button>
+
+                {submitStatus === "success" && (
+                  <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 text-center">
+                    Thank you! Your message has been sent successfully. I'll get
+                    back to you soon.
+                  </div>
+                )}
+
+                {submitStatus === "error" && (
+                  <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-center">
+                    Oops! Something went wrong. Please try again or reach out
+                    directly via email.
+                  </div>
+                )}
+              </form>
+            </motion.div>
           </div>
         </div>
       </section>

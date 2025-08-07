@@ -3,9 +3,10 @@
 import nodemailer from "nodemailer";
 import { Attachment } from "nodemailer/lib/mailer";
 
-const SMTP_SERVER_HOST = "smtp.gmail.com";
-const SMTP_SERVER_USERNAME = "adeshyearantycodes@gmail.com";
-const SMTP_SERVER_PASSWORD = "nmqsalfyjrizzksd";
+const SMTP_SERVER_HOST =
+  process.env.NEXT_PUBLIC_SMTP_SERVER_HOST || "smtp.gmail.com";
+const SMTP_SERVER_USERNAME = process.env.NEXT_PUBLIC_SMTP_SERVER_USER || "";
+const SMTP_SERVER_PASSWORD = process.env.NEXT_PUBLIC_SMTP_SERVER_PASS || "";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",

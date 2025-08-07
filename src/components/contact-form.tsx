@@ -11,7 +11,7 @@ import {
   Send,
   Loader2,
 } from "lucide-react";
-import { submitContactForm } from "@/app/actions/contact";
+import { submitContactForm } from "@/app/api/contact/route";
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
