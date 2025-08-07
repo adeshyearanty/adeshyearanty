@@ -792,7 +792,13 @@ export default function Portfolio() {
                 <h3 className="text-2xl font-bold text-blue-400">
                   Gamyam AI CRM
                 </h3>
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors duration-300" />
+                <a
+                  href="https://dev-app.salesastra.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors duration-300" />
+                </a>
               </div>
               <p className="text-gray-300 mb-4">
                 Comprehensive Lead Management System with NestJS microservices
@@ -840,7 +846,13 @@ export default function Portfolio() {
                 <h3 className="text-2xl font-bold text-purple-400">
                   E-Commerce Backend
                 </h3>
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
+                <a
+                  href="https://github.com/adeshyearanty/ecommerce-backend"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
+                </a>
               </div>
               <p className="text-gray-300 mb-4">
                 Architected RESTful e-commerce APIs with Express.js supporting
@@ -881,7 +893,13 @@ export default function Portfolio() {
                 <h3 className="text-2xl font-bold text-green-400">
                   Book Store Application
                 </h3>
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-green-400 transition-colors duration-300" />
+                <a
+                  href="https://book-store-mern-project-66hw.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-green-400 transition-colors duration-300" />
+                </a>
               </div>
               <p className="text-gray-300 mb-4">
                 Comprehensive book store management application with full CRUD
@@ -922,7 +940,13 @@ export default function Portfolio() {
                 <h3 className="text-2xl font-bold text-orange-400">
                   Weather Application
                 </h3>
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-orange-400 transition-colors duration-300" />
+                <a
+                  href="https://github.com/adeshyearanty/Weather-Application"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-orange-400 transition-colors duration-300" />
+                </a>
               </div>
               <p className="text-gray-300 mb-4">
                 Responsive weather application with React.js featuring
