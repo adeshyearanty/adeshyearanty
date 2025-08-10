@@ -16,6 +16,15 @@ export const metadata: Metadata = {
     description:
       "Portfolio of Yearanty Sri Sai Adesh - Full-Stack Developer and Computer Science Engineer",
     type: "website",
+    url: "https://adeshyearanty.vercel.app",
+    images: [
+      {
+        url: "/logo.png", // We'll add this in step 2
+        width: 1200,
+        height: 630,
+        alt: "Adesh Yearanty Portfolio",
+      },
+    ],
   },
 };
 
