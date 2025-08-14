@@ -178,26 +178,26 @@ export default function Portfolio() {
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]" />
-        {/* Floating animated elements */}
+        {/* Floating animated elements - Better mobile positioning */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-32 md:w-64 h-32 md:h-64 bg-blue-500/5 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-1/4 left-1/4 w-20 sm:w-32 md:w-64 h-20 sm:h-32 md:h-64 bg-blue-500/5 rounded-full blur-3xl animate-pulse" />
           <div
-            className="absolute top-3/4 right-1/4 w-48 md:w-96 h-48 md:h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse"
+            className="absolute top-3/4 right-1/4 w-24 sm:w-48 md:w-96 h-24 sm:h-48 md:h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse"
             style={{ animationDelay: "2s" }}
           />
           <div
-            className="absolute top-1/2 left-3/4 w-24 md:w-48 h-24 md:h-48 bg-pink-500/5 rounded-full blur-3xl animate-pulse"
+            className="absolute top-1/2 left-3/4 w-16 sm:w-24 md:w-48 h-16 sm:h-24 md:h-48 bg-pink-500/5 rounded-full blur-3xl animate-pulse"
             style={{ animationDelay: "4s" }}
           />
         </div>
         {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:25px_25px] md:bg-[size:50px_50px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:20px_20px] sm:bg-[size:25px_25px] md:bg-[size:50px_50px]" />
       </div>
 
       {/* Enhanced Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-xl border-b border-gray-700/50 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4 lg:py-6">
+          <div className="flex justify-between items-center py-3 lg:py-6">
             {/* Logo/Brand */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -205,15 +205,9 @@ export default function Portfolio() {
               transition={{ duration: 0.6 }}
               className="flex items-center space-x-2 lg:space-x-3"
             >
-              <Image
-                src="/logo.png"
-                alt="Adesh Yearanty"
-                width={32}
-                height={32}
-                style={{
-                  filter: "invert(1)",
-                }}
-              />
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center text-sm font-bold">
+                A
+              </div>
               <span className="text-lg lg:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Adesh Yearanty
               </span>
@@ -252,9 +246,9 @@ export default function Portfolio() {
             </div>
 
             {/* Social Links & Mobile Menu */}
-            <div className="flex items-center space-x-3 lg:space-x-4">
+            <div className="flex items-center space-x-2 lg:space-x-4">
               {/* Social Links - Hidden on mobile */}
-              <div className="hidden sm:flex items-center space-x-3">
+              <div className="hidden sm:flex items-center space-x-2">
                 <motion.a
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -346,7 +340,7 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* Hero Section - Mobile Responsive */}
+      {/* Hero Section - Mobile First Responsive */}
       <section
         id="hero"
         className="relative min-h-screen flex items-center justify-center pt-20 lg:pt-24 px-4 sm:px-6 lg:px-8"
@@ -359,22 +353,22 @@ export default function Portfolio() {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="space-y-6 lg:space-y-8 text-center lg:text-left"
+                className="space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left"
               >
                 <div>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-base lg:text-lg text-blue-400 font-medium mb-3 lg:mb-4"
+                    className="text-sm sm:text-base lg:text-lg text-blue-400 font-medium mb-2 lg:mb-4"
                   >
-                    Hello, I&apos;m
+                    Hello, I'm
                   </motion.p>
                   <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-3 lg:mb-4 leading-tight"
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-2 lg:mb-4 leading-tight"
                   >
                     <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                       Yearanty Sri
@@ -388,7 +382,7 @@ export default function Portfolio() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-4 lg:mb-6"
+                    className="text-base sm:text-lg lg:text-2xl text-gray-300 mb-3 lg:mb-6"
                   >
                     Full-Stack Developer & Computer Science Engineer
                   </motion.p>
@@ -396,7 +390,7 @@ export default function Portfolio() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="text-base lg:text-lg text-gray-400 leading-relaxed max-w-xl mx-auto lg:mx-0"
+                    className="text-sm sm:text-base lg:text-lg text-gray-400 leading-relaxed max-w-xl mx-auto lg:mx-0"
                   >
                     Passionate about creating scalable web solutions with modern
                     technologies. Currently working as Full-Stack Developer at
@@ -408,18 +402,20 @@ export default function Portfolio() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
-                  className="flex flex-col sm:flex-row sm:flex-wrap gap-3 lg:gap-4 text-sm text-gray-300 justify-center lg:justify-start"
+                  className="flex flex-col space-y-2 sm:space-y-1 text-xs sm:text-sm text-gray-300 justify-center lg:justify-start"
                 >
                   <div className="flex items-center gap-2 justify-center lg:justify-start">
-                    <MapPin className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                    <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400 flex-shrink-0" />
                     <span>Hyderabad, India</span>
                   </div>
                   <div className="flex items-center gap-2 justify-center lg:justify-start">
-                    <Mail className="w-4 h-4 text-purple-400 flex-shrink-0" />
-                    <span className="truncate">adesh.yearanty@gmail.com</span>
+                    <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm">
+                      adesh.yearanty@gmail.com
+                    </span>
                   </div>
                   <div className="flex items-center gap-2 justify-center lg:justify-start">
-                    <Phone className="w-4 h-4 text-green-400 flex-shrink-0" />
+                    <Phone className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" />
                     <span>+91 97000 15263</span>
                   </div>
                 </motion.div>
@@ -428,19 +424,19 @@ export default function Portfolio() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.7 }}
-                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                  className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start"
                 >
                   <button
                     onClick={() => scrollToSection("projects")}
-                    className="px-6 lg:px-8 py-3 lg:py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                    className="px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white font-semibold text-sm sm:text-base hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
                   >
                     View My Work
                   </button>
                   <button
                     onClick={() => scrollToSection("contact")}
-                    className="px-6 lg:px-8 py-3 lg:py-4 border-2 border-gray-600 rounded-full text-white font-semibold hover:border-blue-400 hover:text-blue-400 transition-all duration-300"
+                    className="px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 border-2 border-gray-600 rounded-full text-white font-semibold text-sm sm:text-base hover:border-blue-400 hover:text-blue-400 transition-all duration-300"
                   >
-                    Let&apos;s Connect
+                    Let's Connect
                   </button>
                 </motion.div>
 
@@ -448,21 +444,21 @@ export default function Portfolio() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
-                  className="flex gap-4 justify-center lg:justify-start"
+                  className="flex gap-3 sm:gap-4 justify-center lg:justify-start"
                 >
                   <a
                     href="https://github.com/adeshyearanty"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110 flex items-center justify-center"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110 flex items-center justify-center"
                   >
-                    <Github className="w-6 h-6" />
+                    <Github className="w-5 h-5 sm:w-6 sm:h-6" />
                   </a>
                   <a
                     href="mailto:adesh.yearanty@gmail.com"
-                    className="w-12 h-12 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110 flex items-center justify-center"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 hover:scale-110 flex items-center justify-center"
                   >
-                    <Mail className="w-6 h-6" />
+                    <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                   </a>
                 </motion.div>
               </motion.div>
@@ -476,31 +472,29 @@ export default function Portfolio() {
               className="relative order-1 lg:order-2"
             >
               <div className="relative z-10">
-                {/* Main image container - Responsive sizing */}
-                <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 mx-auto">
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 rotate-6 transform"></div>
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 -rotate-6 transform"></div>
-                  <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gray-800 border-2 border-gray-700">
-                    <Image
+                {/* Main image container - Better responsive sizing */}
+                <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 mx-auto">
+                  <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 rotate-6 transform"></div>
+                  <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 -rotate-6 transform"></div>
+                  <div className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-gray-800 border-2 border-gray-700">
+                    <img
+                      className="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-4xl font-bold text-white"
                       src="/Photo.jpg"
-                      alt="Yearanty Sri Sai Adesh"
-                      width={320}
-                      height={320}
-                      className="w-full h-full object-cover"
+                      alt="Adesh Yearanty"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent"></div>
                   </div>
                 </div>
 
-                {/* Floating stats cards - Responsive positioning */}
+                {/* Floating stats cards - Better mobile positioning */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1 }}
-                  className="absolute -top-2 -left-2 sm:-top-4 sm:-left-4 bg-gray-800/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-700 shadow-lg"
+                  className="absolute -top-1 -left-1 sm:-top-2 sm:-left-2 md:-top-4 md:-left-4 bg-gray-800/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 border border-gray-700 shadow-lg"
                 >
                   <div className="text-center">
-                    <div className="text-xl sm:text-2xl font-bold text-blue-400">
+                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-blue-400">
                       9.28
                     </div>
                     <div className="text-xs text-gray-400">CGPA</div>
@@ -511,10 +505,10 @@ export default function Portfolio() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.2 }}
-                  className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 bg-gray-800/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-700 shadow-lg"
+                  className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 md:-bottom-4 md:-right-4 bg-gray-800/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 border border-gray-700 shadow-lg"
                 >
                   <div className="text-center">
-                    <div className="text-xl sm:text-2xl font-bold text-purple-400">
+                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-purple-400">
                       2025
                     </div>
                     <div className="text-xs text-gray-400">Graduate</div>
@@ -525,10 +519,10 @@ export default function Portfolio() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 1.4 }}
-                  className="absolute top-1/2 -left-4 sm:-left-8 transform -translate-y-1/2 bg-gray-800/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-700 shadow-lg"
+                  className="absolute top-1/2 -left-2 sm:-left-4 md:-left-8 transform -translate-y-1/2 bg-gray-800/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 border border-gray-700 shadow-lg"
                 >
                   <div className="text-center">
-                    <div className="text-lg sm:text-2xl font-bold text-green-400">
+                    <div className="text-sm sm:text-lg md:text-2xl font-bold text-green-400">
                       Full-Stack
                     </div>
                     <div className="text-xs text-gray-400">Developer</div>
@@ -543,14 +537,14 @@ export default function Portfolio() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.5 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2"
           >
             <button
               onClick={() => scrollToSection("about")}
-              className="animate-bounce flex flex-col items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-300"
+              className="animate-bounce flex flex-col items-center gap-1 sm:gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-300"
             >
-              <span className="text-sm">Scroll Down</span>
-              <ChevronDown className="w-6 h-6" />
+              <span className="text-xs sm:text-sm">Scroll Down</span>
+              <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </motion.div>
         </div>
