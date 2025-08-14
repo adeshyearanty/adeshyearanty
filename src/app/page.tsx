@@ -1,17 +1,19 @@
 "use client";
 
 import type React from "react";
-import Image from "next/image";
 
 import { motion, useScroll } from "framer-motion";
 import {
+  Briefcase,
   Building,
+  Calendar,
   ChevronDown,
   Cloud,
   Code,
   Database,
   ExternalLink,
   Github,
+  GraduationCap,
   Mail,
   MapPin,
   Menu,
@@ -21,9 +23,6 @@ import {
   User,
   X,
   Zap,
-  Calendar,
-  GraduationCap,
-  Briefcase,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -41,9 +40,6 @@ export default function Portfolio() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
   const { scrollYProgress } = useScroll();
-  const [activeFilter, setActiveFilter] = useState("All");
-  type Project = { id: string; category: string; title: string };
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
 
   // Add progress bar at the top of the page
   useEffect(() => {
@@ -95,27 +91,6 @@ export default function Portfolio() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    const projects = [
-      { id: "gamyam-crm", category: "Web Apps", title: "Gamyam AI CRM" },
-      { id: "ecommerce", category: "APIs", title: "E-Commerce Backend" },
-      {
-        id: "bookstore",
-        category: "Web Apps",
-        title: "Book Store Application",
-      },
-      { id: "weather", category: "Web Apps", title: "Weather Application" },
-    ];
-
-    if (activeFilter === "All") {
-      setFilteredProjects(projects);
-    } else {
-      setFilteredProjects(
-        projects.filter((project) => project.category === activeFilter)
-      );
-    }
-  }, [activeFilter]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -362,7 +337,7 @@ export default function Portfolio() {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-sm sm:text-base lg:text-lg text-blue-400 font-medium mb-2 lg:mb-4"
                   >
-                    Hello, I'm
+                    Hello, I&apos;m
                   </motion.p>
                   <motion.h1
                     initial={{ opacity: 0, y: 30 }}
@@ -436,7 +411,7 @@ export default function Portfolio() {
                     onClick={() => scrollToSection("contact")}
                     className="px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 border-2 border-gray-600 rounded-full text-white font-semibold text-sm sm:text-base hover:border-blue-400 hover:text-blue-400 transition-all duration-300"
                   >
-                    Let's Connect
+                    Let&apos;s Connect
                   </button>
                 </motion.div>
 
@@ -577,7 +552,7 @@ export default function Portfolio() {
               className="space-y-6"
             >
               <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                I'm a passionate Computer Science Engineering graduate from
+                I&apos;m a passionate Computer Science Engineering graduate from
                 Chaitanya Bharathi Institute of Technology with an outstanding
                 CGPA of 9.28/10.00. Currently working as a Full-Stack Developer
                 at Miraki Technologies, where I develop innovative CRM solutions
@@ -585,9 +560,9 @@ export default function Portfolio() {
               </p>
               <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
                 My expertise spans across modern web technologies including
-                NestJS, Next.js, React.js, and cloud services. I'm passionate
-                about creating scalable, efficient solutions that drive business
-                growth and enhance user experiences.
+                NestJS, Next.js, React.js, and cloud services. I&apos;m
+                passionate about creating scalable, efficient solutions that
+                drive business growth and enhance user experiences.
               </p>
             </motion.div>
 
@@ -1236,33 +1211,6 @@ export default function Portfolio() {
             </p>
           </motion.div>
 
-          {/* Project Filter Tabs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="flex justify-center mb-12"
-          >
-            <div className="flex bg-gray-800/50 backdrop-blur-sm rounded-full p-2 border border-gray-700">
-              {["All", "Web Apps", "APIs"].map((filter, index) => (
-                <motion.button
-                  key={filter}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                    activeFilter === filter
-                      ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
-                      : "text-gray-400 hover:text-white hover:bg-gray-700/50"
-                  }`}
-                >
-                  {filter}
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-
           {/* Projects Grid with 3D Effects */}
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Salesastra CRM - Enhanced */}
@@ -1703,26 +1651,6 @@ export default function Portfolio() {
               </div>
             </motion.div>
           </div>
-
-          {/* View More Projects Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <motion.button
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-lg"
-            >
-              View All Projects on GitHub
-            </motion.button>
-          </motion.div>
         </div>
       </section>
 
@@ -1743,8 +1671,9 @@ export default function Portfolio() {
               Get In Touch
             </h2>
             <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto mb-8 lg:mb-12">
-              I'm always open to discussing new opportunities and interesting
-              projects. Let's connect and create something amazing together!
+              I&apos;m always open to discussing new opportunities and
+              interesting projects. Let&apos;s connect and create something
+              amazing together!
             </p>
           </motion.div>
 
@@ -1991,8 +1920,8 @@ export default function Portfolio() {
                     animate={{ opacity: 1, y: 0 }}
                     className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 text-center"
                   >
-                    Thank you! Your message has been sent successfully. I'll get
-                    back to you soon.
+                    Thank you! Your message has been sent successfully.
+                    I&apos;ll get back to you soon.
                   </motion.div>
                 )}
 
