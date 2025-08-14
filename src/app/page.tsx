@@ -1423,7 +1423,7 @@ export default function Portfolio() {
                     E-Commerce Backend
                   </h3>
                   <motion.a
-                    href="https://github.com/adeshyearanty/ecommerce-backend"
+                    href="https://ecommerce-backend-rz03.onrender.com/api-docs"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, rotate: -5 }}
