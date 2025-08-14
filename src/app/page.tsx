@@ -246,13 +246,13 @@ export default function Portfolio() {
                 </motion.a>
               </div>
 
-              {/* Mobile Menu Button */}
+              {/* Mobile Menu Button - Removed on mobile */}
               <motion.button
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden w-9 h-9 bg-gray-800/80 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 rounded-full flex items-center justify-center transition-all duration-300"
+                className="hidden lg:flex w-9 h-9 bg-gray-800/80 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 rounded-full items-center justify-center transition-all duration-300"
               >
                 {isMenuOpen ? (
                   <X className="w-5 h-5" />
@@ -263,7 +263,7 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu - Hidden on mobile */}
           <motion.div
             initial={false}
             animate={{
@@ -271,7 +271,7 @@ export default function Portfolio() {
               opacity: isMenuOpen ? 1 : 0,
             }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden border-t border-gray-700/50"
+            className="hidden lg:block overflow-hidden border-t border-gray-700/50"
           >
             <div className="py-4 space-y-1">
               {navItems.map((item) => (
@@ -507,12 +507,12 @@ export default function Portfolio() {
             </motion.div>
           </div>
 
-          {/* Scroll indicator */}
+          {/* Scroll indicator - Hidden on mobile */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.5 }}
-            className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:block"
           >
             <button
               onClick={() => scrollToSection("about")}
@@ -626,9 +626,9 @@ export default function Portfolio() {
             </h2>
           </motion.div>
 
-          <div className="relative">
+          <div className="relative max-w-4xl mx-auto">
             {/* Timeline line */}
-            <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+            <div className="absolute left-6 lg:left-1/2 transform lg:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
 
             <div className="space-y-8 lg:space-y-12">
               {/* Bachelor's Degree */}
@@ -637,11 +637,14 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="relative flex items-center"
+                className="relative lg:flex lg:items-center"
               >
-                <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-4 border-gray-900 z-10"></div>
-                <div className="ml-12 lg:ml-0 lg:w-1/2 lg:pr-8">
-                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300">
+                {/* Timeline dot */}
+                <div className="absolute left-6 lg:left-1/2 transform lg:-translate-x-1/2 top-8 lg:top-1/2 lg:-translate-y-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-gray-900 z-10"></div>
+
+                {/* Content container for left side on desktop */}
+                <div className="ml-16 lg:ml-0 lg:w-1/2 lg:pr-12">
+                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-blue-500/30 hover:border-blue-500/50 transition-all duration-300">
                     <div className="flex items-center gap-3 mb-3">
                       <GraduationCap className="w-6 h-6 text-blue-400" />
                       <span className="text-sm text-blue-400 font-medium">
@@ -673,11 +676,14 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="relative flex items-center lg:justify-end"
+                className="relative lg:flex lg:items-center lg:justify-end"
               >
-                <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full border-4 border-gray-900 z-10"></div>
-                <div className="ml-12 lg:ml-0 lg:w-1/2 lg:pl-8">
-                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700 hover:border-purple-500/50 transition-all duration-300">
+                {/* Timeline dot */}
+                <div className="absolute left-6 lg:left-1/2 transform lg:-translate-x-1/2 top-8 lg:top-1/2 lg:-translate-y-1/2 w-4 h-4 bg-purple-500 rounded-full border-4 border-gray-900 z-10"></div>
+
+                {/* Content container for right side on desktop */}
+                <div className="ml-16 lg:ml-0 lg:w-1/2 lg:pl-12">
+                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300">
                     <div className="flex items-center gap-3 mb-3">
                       <Calendar className="w-6 h-6 text-purple-400" />
                       <span className="text-sm text-purple-400 font-medium">
@@ -707,11 +713,14 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
-                className="relative flex items-center"
+                className="relative lg:flex lg:items-center"
               >
-                <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-green-500 to-blue-500 rounded-full border-4 border-gray-900 z-10"></div>
-                <div className="ml-12 lg:ml-0 lg:w-1/2 lg:pr-8">
-                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700 hover:border-green-500/50 transition-all duration-300">
+                {/* Timeline dot */}
+                <div className="absolute left-6 lg:left-1/2 transform lg:-translate-x-1/2 top-8 lg:top-1/2 lg:-translate-y-1/2 w-4 h-4 bg-green-500 rounded-full border-4 border-gray-900 z-10"></div>
+
+                {/* Content container for left side on desktop */}
+                <div className="ml-16 lg:ml-0 lg:w-1/2 lg:pr-12">
+                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-green-500/30 hover:border-green-500/50 transition-all duration-300">
                     <div className="flex items-center gap-3 mb-3">
                       <Calendar className="w-6 h-6 text-green-400" />
                       <span className="text-sm text-green-400 font-medium">
@@ -761,8 +770,8 @@ export default function Portfolio() {
                 delay: i * 0.1,
               }}
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${(i * 5.5) % 100}%`,
+                top: `${(i * 4.8) % 100}%`,
               }}
             />
           ))}
@@ -1069,9 +1078,9 @@ export default function Portfolio() {
                 viewport={{ once: true }}
                 className="relative flex items-center"
               >
-                <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-4 border-gray-900 z-10"></div>
+                <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-gray-900 z-10"></div>
                 <div className="ml-12 lg:ml-0 lg:w-1/2 lg:pr-8">
-                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300">
+                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-blue-500/30 hover:border-blue-500/50 transition-all duration-300 w-full lg:w-96">
                     <div className="flex items-center gap-3 mb-3">
                       <Briefcase className="w-6 h-6 text-blue-400" />
                       <span className="text-sm text-blue-400 font-medium">
@@ -1118,9 +1127,9 @@ export default function Portfolio() {
                 viewport={{ once: true }}
                 className="relative flex items-center lg:justify-end"
               >
-                <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full border-4 border-gray-900 z-10"></div>
+                <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full border-4 border-gray-900 z-10"></div>
                 <div className="ml-12 lg:ml-0 lg:w-1/2 lg:pl-8">
-                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700 hover:border-purple-500/50 transition-all duration-300">
+                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 w-full lg:w-96">
                     <div className="flex items-center gap-3 mb-3">
                       <Briefcase className="w-6 h-6 text-purple-400" />
                       <span className="text-sm text-purple-400 font-medium">
@@ -1187,9 +1196,9 @@ export default function Portfolio() {
                 delay: i * 0.2,
               }}
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                transform: `rotate(${Math.random() * 360}deg)`,
+                left: `${(i * 6.7) % 100}%`,
+                top: `${(i * 5.3) % 100}%`,
+                transform: `rotate(${(i * 24) % 360}deg)`,
               }}
             />
           ))}
