@@ -1619,7 +1619,7 @@ export default function Portfolio() {
                     Weather App
                   </h3>
                   <motion.a
-                    href="https://github.com/adeshyearanty/Weather-Application"
+                    href="https://weather-app-pi-six-50.vercel.app/"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, rotate: -5 }}
