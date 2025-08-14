@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import Image from "next/image";
 
 import { motion, useScroll } from "framer-motion";
 import {
@@ -25,21 +26,10 @@ import {
   Briefcase,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import { generateDeterministicPositions, useIsClient } from "@/lib/utils";
-
-const PARTICLE_COUNT = 20;
-const BORDER_PARTICLE_COUNT = 15;
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("hero");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isClient = useIsClient();
-  const particles = generateDeterministicPositions(PARTICLE_COUNT);
-  const borderParticles = generateDeterministicPositions(
-    BORDER_PARTICLE_COUNT,
-    42
-  );
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,6 +41,9 @@ export default function Portfolio() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
   const { scrollYProgress } = useScroll();
+  const [activeFilter, setActiveFilter] = useState("All");
+  type Project = { id: string; category: string; title: string };
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
 
   // Add progress bar at the top of the page
   useEffect(() => {
@@ -103,10 +96,31 @@ export default function Portfolio() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const projects = [
+      { id: "gamyam-crm", category: "Web Apps", title: "Gamyam AI CRM" },
+      { id: "ecommerce", category: "APIs", title: "E-Commerce Backend" },
+      {
+        id: "bookstore",
+        category: "Web Apps",
+        title: "Book Store Application",
+      },
+      { id: "weather", category: "Web Apps", title: "Weather Application" },
+    ];
+
+    if (activeFilter === "All") {
+      setFilteredProjects(projects);
+    } else {
+      setFilteredProjects(
+        projects.filter((project) => project.category === activeFilter)
+      );
+    }
+  }, [activeFilter]);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navHeight = 100;
+      const navHeight = window.innerWidth >= 1024 ? 100 : 80;
       const elementPosition = element.offsetTop - navHeight;
       window.scrollTo({
         top: elementPosition,
@@ -191,11 +205,6 @@ export default function Portfolio() {
               transition={{ duration: 0.6 }}
               className="flex items-center space-x-2 lg:space-x-3"
             >
-              {/* <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm lg:text-lg">
-                  A
-                </span>
-              </div> */}
               <Image
                 src="/logo.png"
                 alt="Adesh Yearanty"
@@ -574,7 +583,7 @@ export default function Portfolio() {
               className="space-y-6"
             >
               <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                I&apos;m a passionate Computer Science Engineering graduate from
+                I'm a passionate Computer Science Engineering graduate from
                 Chaitanya Bharathi Institute of Technology with an outstanding
                 CGPA of 9.28/10.00. Currently working as a Full-Stack Developer
                 at Miraki Technologies, where I develop innovative CRM solutions
@@ -582,9 +591,9 @@ export default function Portfolio() {
               </p>
               <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
                 My expertise spans across modern web technologies including
-                NestJS, Next.js, React.js, and cloud services. I&apos;m
-                passionate about creating scalable, efficient solutions that
-                drive business growth and enhance user experiences.
+                NestJS, Next.js, React.js, and cloud services. I'm passionate
+                about creating scalable, efficient solutions that drive business
+                growth and enhance user experiences.
               </p>
             </motion.div>
 
@@ -768,30 +777,26 @@ export default function Portfolio() {
       >
         {/* Animated background particles */}
         <div className="absolute inset-0 overflow-hidden">
-          {isClient &&
-            particles.map((particle, i) => (
-              <motion.div
-                key={`particle-${i}`}
-                className="absolute w-2 h-2"
-                animate={{
-                  x: [0, 30, 0],
-                  y: [0, -30, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                }}
-              >
-                <div
-                  className="absolute w-2 h-2 bg-blue-400/20 rounded-full"
-                  style={{
-                    left: `${particle.x}%`,
-                    top: `${particle.y}%`,
-                  }}
-                />
-              </motion.div>
-            ))}
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-blue-400/20 rounded-full"
+              animate={{
+                x: [0, 100, 0],
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 3 + i * 0.2,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: i * 0.1,
+              }}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -833,46 +838,6 @@ export default function Portfolio() {
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
                   <Code className="w-12 h-12 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="w-16 h-16 relative">
-                    <svg
-                      className="w-16 h-16 transform -rotate-90"
-                      viewBox="0 0 36 36"
-                    >
-                      <path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="rgba(59, 130, 246, 0.2)"
-                        strokeWidth="2"
-                      />
-                      <motion.path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="url(#gradient1)"
-                        strokeWidth="2"
-                        strokeDasharray="85, 100"
-                        initial={{ strokeDasharray: "0, 100" }}
-                        whileInView={{ strokeDasharray: "85, 100" }}
-                        transition={{ duration: 2, delay: 0.5 }}
-                      />
-                      <defs>
-                        <linearGradient
-                          id="gradient1"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="0%"
-                        >
-                          <stop offset="0%" stopColor="#3B82F6" />
-                          <stop offset="100%" stopColor="#8B5CF6" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-sm font-bold text-blue-400">
-                        85%
-                      </span>
-                    </div>
-                  </div>
                 </div>
 
                 <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-400 transition-colors duration-300">
@@ -881,49 +846,23 @@ export default function Portfolio() {
 
                 <div className="space-y-3">
                   {[
-                    {
-                      name: "JavaScript",
-                      level: 95,
-                      color: "from-yellow-400 to-orange-500",
-                    },
-                    {
-                      name: "TypeScript",
-                      level: 80,
-                      color: "from-blue-400 to-blue-600",
-                    },
-                    {
-                      name: "Java",
-                      level: 75,
-                      color: "from-red-400 to-red-600",
-                    },
-                    {
-                      name: "Python",
-                      level: 70,
-                      color: "from-green-400 to-green-600",
-                    },
-                    {
-                      name: "C Language",
-                      level: 70,
-                      color: "from-gray-400 to-gray-600",
-                    },
-                  ].map((skill, index) => (
-                    <div key={skill.name} className="space-y-1">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-300">{skill.name}</span>
-                        <span className="text-gray-400">{skill.level}%</span>
-                      </div>
-                      <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                        <motion.div
-                          className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          transition={{
-                            duration: 1.5,
-                            delay: 0.5 + index * 0.1,
-                          }}
-                        />
-                      </div>
-                    </div>
+                    "JavaScript",
+                    "TypeScript",
+                    "Java",
+                    "Python",
+                    "C Language",
+                  ].map((lang, index) => (
+                    <motion.div
+                      key={lang}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      whileHover={{ scale: 1.05, x: 5 }}
+                      transition={{ duration: 0.3, delay: 1.2 + index * 0.1 }}
+                      className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer"
+                    >
+                      <div className="w-2 h-2 bg-blue-400 rounded-full group-hover:animate-pulse" />
+                      <span className="text-sm">{lang}</span>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -948,46 +887,6 @@ export default function Portfolio() {
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
                   <Zap className="w-12 h-12 text-purple-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="w-16 h-16 relative">
-                    <svg
-                      className="w-16 h-16 transform -rotate-90"
-                      viewBox="0 0 36 36"
-                    >
-                      <path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="rgba(139, 92, 246, 0.2)"
-                        strokeWidth="2"
-                      />
-                      <motion.path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="url(#gradient2)"
-                        strokeWidth="2"
-                        strokeDasharray="92, 100"
-                        initial={{ strokeDasharray: "0, 100" }}
-                        whileInView={{ strokeDasharray: "92, 100" }}
-                        transition={{ duration: 2, delay: 0.7 }}
-                      />
-                      <defs>
-                        <linearGradient
-                          id="gradient2"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="0%"
-                        >
-                          <stop offset="0%" stopColor="#8B5CF6" />
-                          <stop offset="100%" stopColor="#EC4899" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-sm font-bold text-purple-400">
-                        92%
-                      </span>
-                    </div>
-                  </div>
                 </div>
 
                 <h3 className="text-xl font-semibold mb-4 group-hover:text-purple-400 transition-colors duration-300">
@@ -1037,46 +936,6 @@ export default function Portfolio() {
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
                   <Database className="w-12 h-12 text-green-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="w-16 h-16 relative">
-                    <svg
-                      className="w-16 h-16 transform -rotate-90"
-                      viewBox="0 0 36 36"
-                    >
-                      <path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="rgba(34, 197, 94, 0.2)"
-                        strokeWidth="2"
-                      />
-                      <motion.path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="url(#gradient3)"
-                        strokeWidth="2"
-                        strokeDasharray="88, 100"
-                        initial={{ strokeDasharray: "0, 100" }}
-                        whileInView={{ strokeDasharray: "88, 100" }}
-                        transition={{ duration: 2, delay: 0.9 }}
-                      />
-                      <defs>
-                        <linearGradient
-                          id="gradient3"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="0%"
-                        >
-                          <stop offset="0%" stopColor="#22C55E" />
-                          <stop offset="100%" stopColor="#10B981" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-sm font-bold text-green-400">
-                        88%
-                      </span>
-                    </div>
-                  </div>
                 </div>
 
                 <h3 className="text-xl font-semibold mb-4 group-hover:text-green-400 transition-colors duration-300">
@@ -1085,17 +944,9 @@ export default function Portfolio() {
 
                 <div className="space-y-4">
                   {[
-                    { name: "MongoDB", icon: "🍃", proficiency: "Expert" },
-                    {
-                      name: "AWS S3 SDK",
-                      icon: "☁️",
-                      proficiency: "Proficient",
-                    },
-                    {
-                      name: "AWS Amplify Lambda",
-                      icon: "⚡",
-                      proficiency: "Proficient",
-                    },
+                    { name: "MongoDB", icon: "🍃" },
+                    { name: "AWS S3 SDK", icon: "☁️" },
+                    { name: "AWS Amplify Lambda", icon: "⚡" },
                   ].map((db, index) => (
                     <motion.div
                       key={db.name}
@@ -1109,9 +960,6 @@ export default function Portfolio() {
                       <div>
                         <div className="font-medium text-gray-300">
                           {db.name}
-                        </div>
-                        <div className="text-xs text-green-400">
-                          {db.proficiency}
                         </div>
                       </div>
                     </motion.div>
@@ -1139,46 +987,6 @@ export default function Portfolio() {
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
                   <Cloud className="w-12 h-12 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="w-16 h-16 relative">
-                    <svg
-                      className="w-16 h-16 transform -rotate-90"
-                      viewBox="0 0 36 36"
-                    >
-                      <path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="rgba(249, 115, 22, 0.2)"
-                        strokeWidth="2"
-                      />
-                      <motion.path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="url(#gradient4)"
-                        strokeWidth="2"
-                        strokeDasharray="90, 100"
-                        initial={{ strokeDasharray: "0, 100" }}
-                        whileInView={{ strokeDasharray: "90, 100" }}
-                        transition={{ duration: 2, delay: 1.1 }}
-                      />
-                      <defs>
-                        <linearGradient
-                          id="gradient4"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="0%"
-                        >
-                          <stop offset="0%" stopColor="#F97316" />
-                          <stop offset="100%" stopColor="#EF4444" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-sm font-bold text-orange-400">
-                        90%
-                      </span>
-                    </div>
-                  </div>
                 </div>
 
                 <h3 className="text-xl font-semibold mb-4 group-hover:text-orange-400 transition-colors duration-300">
@@ -1347,7 +1155,7 @@ export default function Portfolio() {
                     <div className="flex items-center gap-3 mb-3">
                       <Briefcase className="w-6 h-6 text-purple-400" />
                       <span className="text-sm text-purple-400 font-medium">
-                        Feb 2024 - Jul 2024
+                        Feb 2024 -
                       </span>
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2">
@@ -1395,32 +1203,27 @@ export default function Portfolio() {
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-gray-800/30 to-gray-900/30" />
           {/* Floating geometric shapes */}
-          {isClient &&
-            borderParticles.map((particle, i) => (
-              <motion.div
-                key={`particle-${i}`}
-                className="absolute w-4 h-4"
-                animate={{
-                  rotate: [0, 360],
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.7, 0.3],
-                }}
-                transition={{
-                  duration: 4 + i * 0.3,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                }}
-              >
-                <div
-                  className="absolute w-4 h-4 border border-blue-400/20"
-                  style={{
-                    left: `${particle.x}%`,
-                    top: `${particle.y}%`,
-                    transform: `rotate(${particle.rotation}deg)`,
-                  }}
-                />
-              </motion.div>
-            ))}
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-4 h-4 border border-blue-400/20"
+              animate={{
+                rotate: [0, 360],
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.7, 0.3],
+              }}
+              transition={{
+                duration: 4 + i * 0.3,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: i * 0.2,
+              }}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                transform: `rotate(${Math.random() * 360}deg)`,
+              }}
+            />
+          ))}
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -1440,7 +1243,7 @@ export default function Portfolio() {
           </motion.div>
 
           {/* Project Filter Tabs */}
-          {/* <motion.div
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -1464,7 +1267,7 @@ export default function Portfolio() {
                 </motion.button>
               ))}
             </div>
-          </motion.div> */}
+          </motion.div>
 
           {/* Projects Grid with 3D Effects */}
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
@@ -1516,7 +1319,7 @@ export default function Portfolio() {
                     <div className="grid grid-cols-3 gap-2">
                       {[...Array(6)].map((_, i) => (
                         <div
-                          key={`particle-${i}`}
+                          key={i}
                           className="h-8 bg-gray-700/50 rounded animate-pulse"
                           style={{ animationDelay: `${i * 0.1}s` }}
                         ></div>
@@ -1556,38 +1359,6 @@ export default function Portfolio() {
                   Next.js, supporting 1000+ leads with advanced filtering, task
                   management, and file handling through AWS S3 integration.
                 </p>
-
-                {/* Animated metrics */}
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  {[
-                    {
-                      label: "Productivity",
-                      value: "60%",
-                      color: "text-green-400",
-                    },
-                    { label: "Uploads", value: "500+", color: "text-blue-400" },
-                    {
-                      label: "Conversion",
-                      value: "45%",
-                      color: "text-purple-400",
-                    },
-                  ].map((metric, index) => (
-                    <motion.div
-                      key={metric.label}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                      className="text-center p-3 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-all duration-300"
-                    >
-                      <div className={`text-lg font-bold ${metric.color}`}>
-                        {metric.value}
-                      </div>
-                      <div className="text-xs text-gray-400">
-                        {metric.label}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
 
                 {/* Tech stack with animated badges */}
                 <div className="flex flex-wrap gap-2">
@@ -1718,36 +1489,6 @@ export default function Portfolio() {
                   and optimized performance for 100+ concurrent users.
                 </p>
 
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  {[
-                    {
-                      label: "Response Time",
-                      value: "50%↓",
-                      color: "text-green-400",
-                    },
-                    {
-                      label: "Security",
-                      value: "Enhanced",
-                      color: "text-blue-400",
-                    },
-                  ].map((metric, index) => (
-                    <motion.div
-                      key={metric.label}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                      className="text-center p-3 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-all duration-300"
-                    >
-                      <div className={`text-lg font-bold ${metric.color}`}>
-                        {metric.value}
-                      </div>
-                      <div className="text-xs text-gray-400">
-                        {metric.label}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-
                 <div className="flex flex-wrap gap-2">
                   {[
                     {
@@ -1798,7 +1539,7 @@ export default function Portfolio() {
                   <div className="grid grid-cols-4 gap-2">
                     {[...Array(8)].map((_, i) => (
                       <motion.div
-                        key={`particle-${i}`}
+                        key={i}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3, delay: i * 0.1 }}
@@ -1838,32 +1579,6 @@ export default function Portfolio() {
                   tracking, advanced search capabilities, and intuitive CRUD
                   operations for seamless library management.
                 </p>
-
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  {[
-                    {
-                      label: "Efficiency",
-                      value: "90%↑",
-                      color: "text-green-400",
-                    },
-                    { label: "Books", value: "200+", color: "text-blue-400" },
-                  ].map((metric, index) => (
-                    <motion.div
-                      key={metric.label}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                      className="text-center p-3 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-all duration-300"
-                    >
-                      <div className={`text-lg font-bold ${metric.color}`}>
-                        {metric.value}
-                      </div>
-                      <div className="text-xs text-gray-400">
-                        {metric.label}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
 
                 <div className="flex flex-wrap gap-2">
                   {[
@@ -1970,32 +1685,6 @@ export default function Portfolio() {
                   error handling for reliable global weather data.
                 </p>
 
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  {[
-                    {
-                      label: "Locations",
-                      value: "50+",
-                      color: "text-green-400",
-                    },
-                    { label: "Uptime", value: "99%", color: "text-blue-400" },
-                  ].map((metric, index) => (
-                    <motion.div
-                      key={metric.label}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                      className="text-center p-3 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-all duration-300"
-                    >
-                      <div className={`text-lg font-bold ${metric.color}`}>
-                        {metric.value}
-                      </div>
-                      <div className="text-xs text-gray-400">
-                        {metric.label}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-
                 <div className="flex flex-wrap gap-2">
                   {[
                     { name: "React.js", color: "from-blue-500 to-cyan-500" },
@@ -2022,7 +1711,7 @@ export default function Portfolio() {
           </div>
 
           {/* View More Projects Button */}
-          {/* <motion.div
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -2039,7 +1728,7 @@ export default function Portfolio() {
             >
               View All Projects on GitHub
             </motion.button>
-          </motion.div> */}
+          </motion.div>
         </div>
       </section>
 
@@ -2060,9 +1749,8 @@ export default function Portfolio() {
               Get In Touch
             </h2>
             <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto mb-8 lg:mb-12">
-              I&apos;m always open to discussing new opportunities and
-              interesting projects. Let&apos;s connect and create something
-              amazing together!
+              I'm always open to discussing new opportunities and interesting
+              projects. Let's connect and create something amazing together!
             </p>
           </motion.div>
 
@@ -2309,8 +1997,8 @@ export default function Portfolio() {
                     animate={{ opacity: 1, y: 0 }}
                     className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 text-center"
                   >
-                    Thank you! Your message has been sent successfully.
-                    I&apos;ll get back to you soon.
+                    Thank you! Your message has been sent successfully. I'll get
+                    back to you soon.
                   </motion.div>
                 )}
 
