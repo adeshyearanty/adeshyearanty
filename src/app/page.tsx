@@ -359,7 +359,7 @@ export default function Portfolio() {
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="text-base sm:text-lg lg:text-2xl text-gray-300 mb-3 lg:mb-6"
                   >
-                    Full-Stack Developer & Computer Science Engineer
+                    Full-Stack Developer — Event-Driven Systems & Multi-Tenant Architecture
                   </motion.p>
                   <motion.p
                     initial={{ opacity: 0, y: 30 }}
@@ -367,9 +367,7 @@ export default function Portfolio() {
                     transition={{ duration: 0.8, delay: 0.5 }}
                     className="text-sm sm:text-base lg:text-lg text-gray-400 leading-relaxed max-w-xl mx-auto lg:mx-0"
                   >
-                    Passionate about creating scalable web solutions with modern
-                    technologies. Currently working as Full-Stack Developer at
-                    Miraki Technologies.
+                    I build event-driven, multi-tenant systems — from real-time messaging infrastructure to fine-grained access control — on a stack of NestJS, Next.js, and AWS serverless. Currently building SalesAstra, an AI-powered CRM, at Miraki Technologies.
                   </motion.p>
                 </div>
 
@@ -470,7 +468,7 @@ export default function Portfolio() {
                 >
                   <div className="text-center">
                     <div className="text-lg sm:text-xl md:text-2xl font-bold text-blue-400">
-                      9.28
+                      9.3
                     </div>
                     <div className="text-xs text-gray-400">CGPA</div>
                   </div>
@@ -552,17 +550,17 @@ export default function Portfolio() {
               className="space-y-6"
             >
               <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                I&apos;m a passionate Computer Science Engineering graduate from
-                Chaitanya Bharathi Institute of Technology with an outstanding
-                CGPA of 9.28/10.00. Currently working as a Full-Stack Developer
-                at Miraki Technologies, where I develop innovative CRM solutions
-                and web applications.
+                I&apos;m a Computer Science Engineering graduate from Chaitanya
+                Bharathi Institute of Technology (CGPA 9.3/10.0), currently working as a
+                Full-Stack Developer at Miraki Technologies. I&apos;m a core engineer on
+                SalesAstra, a multi-tenant AI CRM with omni-channel communication across
+                WhatsApp, Instagram, Messenger, and a custom web chatbot.
               </p>
               <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                My expertise spans across modern web technologies including
-                NestJS, Next.js, React.js, and cloud services. I&apos;m
-                passionate about creating scalable, efficient solutions that
-                drive business growth and enhance user experiences.
+                My work spans event-driven architecture (AWS Lambda, Kinesis,
+                SQS), real-time systems (NestJS WebSockets), fine-grained RBAC with
+                graph-based hierarchy, and infrastructure-as-code (Terraform, GitHub
+                Actions). I&apos;m currently building serverless search using AWS OpenSearch.
               </p>
             </motion.div>
 
@@ -580,7 +578,7 @@ export default function Portfolio() {
                 <div>
                   <p className="font-medium">Full-Stack Developer</p>
                   <p className="text-gray-400">Miraki Technologies</p>
-                  <p className="text-sm text-gray-500">Aug 2024 - Present</p>
+                  <p className="text-sm text-gray-500">Aug 2025 - Present</p>
                 </div>
               </div>
 
@@ -591,15 +589,15 @@ export default function Portfolio() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="text-sm">CGPA: 9.28/10.00</span>
+                    <span className="text-sm">CGPA: 9.3/10.0</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                    <span className="text-sm">Leading CRM Development</span>
+                    <span className="text-sm">Built Multi-Tenant Event-Driven CRM</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                    <span className="text-sm">Full-Stack Expertise</span>
+                    <span className="text-sm">Designed Fine-Grained RBAC System</span>
                   </div>
                 </div>
               </div>
@@ -795,7 +793,7 @@ export default function Portfolio() {
           </motion.div>
 
           {/* Skills Constellation */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8 mb-16">
             {/* Programming Languages */}
             <motion.div
               initial={{ opacity: 0, y: 50, rotateY: -15 }}
@@ -828,7 +826,7 @@ export default function Portfolio() {
                     "TypeScript",
                     "Java",
                     "Python",
-                    "C Language",
+                    "C",
                   ].map((lang, index) => (
                     <motion.div
                       key={lang}
@@ -876,8 +874,8 @@ export default function Portfolio() {
                     "NestJS",
                     "Next.js",
                     "React.js",
-                    "Express.js",
                     "Node.js",
+                    "Express.js",
                     "Laravel",
                   ].map((tech, index) => (
                     <motion.div
@@ -923,8 +921,16 @@ export default function Portfolio() {
                 <div className="space-y-4">
                   {[
                     { name: "MongoDB", icon: "🍃" },
-                    { name: "AWS S3 SDK", icon: "☁️" },
-                    { name: "AWS Amplify Lambda", icon: "⚡" },
+                    { name: "Redis", icon: "⚡" },
+                    { name: "AWS OpenSearch", icon: "🔍" },
+                    { name: "Lambda", icon: "⚙️" },
+                    { name: "Kinesis", icon: "📊" },
+                    { name: "SQS", icon: "📮" },
+                    { name: "ECS", icon: "🐳" },
+                    { name: "API Gateway", icon: "🌐" },
+                    { name: "S3", icon: "📦" },
+                    { name: "Cognito", icon: "🔐" },
+                    { name: "ElastiCache", icon: "💾" },
                   ].map((db, index) => (
                     <motion.div
                       key={db.name}
@@ -973,11 +979,16 @@ export default function Portfolio() {
 
                 <div className="space-y-3">
                   {[
-                    "Razorpay Integration",
+                    "Terraform",
+                    "GitHub Actions",
+                    "CI/CD",
                     "RESTful APIs",
-                    "Microservices Architecture",
-                    "Git",
-                    "Docker",
+                    "WebSockets",
+                    "Meta Graph API",
+                    "WhatsApp Business API",
+                    "Microservices",
+                    "Event-Driven Architecture",
+                    "Multi-Tenant Systems",
                   ].map((tool, index) => (
                     <motion.div
                       key={tool}
@@ -989,6 +1000,55 @@ export default function Portfolio() {
                     >
                       <div className="w-2 h-2 bg-orange-400 rounded-full group-hover:animate-pulse" />
                       <span className="text-sm">{tool}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Architecture & Infra */}
+            <motion.div
+              initial={{ opacity: 0, y: 50, rotateY: -15 }}
+              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+              whileHover={{
+                scale: 1.05,
+                rotateY: 5,
+                boxShadow: "0 20px 40px rgba(236, 72, 153, 0.3)",
+              }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 hover:border-pink-500/50 transition-all duration-500 transform-gpu"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 to-rose-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <Building className="w-12 h-12 text-pink-400 group-hover:scale-110 transition-transform duration-300" />
+                </div>
+
+                <h3 className="text-xl font-semibold mb-4 group-hover:text-pink-400 transition-colors duration-300">
+                  Architecture & Infra
+                </h3>
+
+                <div className="space-y-3">
+                  {[
+                    "Event-Driven Architecture",
+                    "Multi-Tenant Systems",
+                    "Role-Based Access Control",
+                    "Redis Caching",
+                    "Infrastructure as Code",
+                  ].map((arch, index) => (
+                    <motion.div
+                      key={arch}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      whileHover={{ scale: 1.05, x: 5 }}
+                      transition={{ duration: 0.3, delay: 1.4 + index * 0.1 }}
+                      className="flex items-center gap-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 cursor-pointer"
+                    >
+                      <div className="w-2 h-2 bg-pink-400 rounded-full group-hover:animate-pulse" />
+                      <span className="text-sm">{arch}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -1009,17 +1069,14 @@ export default function Portfolio() {
             </h3>
             <div className="flex flex-wrap justify-center gap-4">
               {[
-                { name: "Express.js", color: "from-green-400 to-emerald-500" },
-                { name: "Laravel", color: "from-red-400 to-orange-500" },
+                { name: "Terraform", color: "from-purple-400 to-pink-500" },
+                { name: "AWS Cognito", color: "from-orange-400 to-red-500" },
+                { name: "WebSockets", color: "from-blue-400 to-cyan-500" },
+                { name: "Meta Graph API", color: "from-indigo-400 to-purple-500" },
                 { name: "Tailwind CSS", color: "from-cyan-400 to-blue-500" },
-                { name: "Framer Motion", color: "from-purple-400 to-pink-500" },
-                { name: "HTML5", color: "from-orange-400 to-red-500" },
-                { name: "CSS3", color: "from-blue-400 to-purple-500" },
-                { name: "Weather API", color: "from-yellow-400 to-orange-500" },
-                {
-                  name: "Third-party APIs",
-                  color: "from-indigo-400 to-purple-500",
-                },
+                { name: "Framer Motion", color: "from-green-400 to-emerald-500" },
+                { name: "HTML5", color: "from-yellow-400 to-orange-500" },
+                { name: "CSS3", color: "from-red-400 to-pink-500" },
               ].map((tech, index) => (
                 <motion.div
                   key={tech.name}
@@ -1084,7 +1141,7 @@ export default function Portfolio() {
                     <div className="flex items-center gap-3 mb-3">
                       <Briefcase className="w-6 h-6 text-blue-400" />
                       <span className="text-sm text-blue-400 font-medium">
-                        Aug 2024 - Present
+                        Aug 2025 - Present
                       </span>
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2">
@@ -1096,22 +1153,36 @@ export default function Portfolio() {
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
                         <p className="text-sm text-gray-300">
-                          Leading development of Salesastra CRM with NestJS
-                          microservices and Next.js frontend
+                          Architected a multi-tenant CRM platform with omni-channel communication
+                          across WhatsApp, Instagram, Messenger, and a custom web chatbot
                         </p>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
                         <p className="text-sm text-gray-300">
-                          Architecting scalable solutions for 1000+ leads
-                          management
+                          Built event-driven messaging pipeline using AWS Lambda, Kinesis, and SQS, 
+                          integrated with Meta Graph APIs
                         </p>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
                         <p className="text-sm text-gray-300">
-                          Implementing advanced filtering and task management
-                          features
+                          Designed real-time communication with NestJS WebSockets and built the
+                          Next.js frontend for messaging, RBAC admin, and branding configuration
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 flex-shrink-0" />
+                        <p className="text-sm text-gray-300">
+                          Implemented fine-grained RBAC with graph-based hierarchy and scope-based 
+                          permissions (All/Team/Own) across microservices
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
+                        <p className="text-sm text-gray-300">
+                          Currently building serverless global search on AWS OpenSearch integrated 
+                          with the RBAC layer
                         </p>
                       </div>
                     </div>
@@ -1133,7 +1204,7 @@ export default function Portfolio() {
                     <div className="flex items-center gap-3 mb-3">
                       <Briefcase className="w-6 h-6 text-purple-400" />
                       <span className="text-sm text-purple-400 font-medium">
-                        Feb 2024 -
+                        Feb 2025 - Jul 2025
                       </span>
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2">
@@ -1145,22 +1216,28 @@ export default function Portfolio() {
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
                         <p className="text-sm text-gray-300">
-                          Resolved feature requests and bug tickets for Kind
-                          India platform
+                          Engineered SalesAstra&apos;s CRM lead management module using NestJS 
+                          microservices and Next.js
                         </p>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
                         <p className="text-sm text-gray-300">
-                          Developed dynamic pages for Sohum Spa with Razorpay
-                          integration
+                          Resolved 50+ feature requests and bug tickets for Kind India
                         </p>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
                         <p className="text-sm text-gray-300">
-                          Implemented responsive design for Vaishnaoi Group with
-                          AWS Lambda
+                          Built dynamic pages and backend APIs for Sohum Spa with Razorpay payment 
+                          integration
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 flex-shrink-0" />
+                        <p className="text-sm text-gray-300">
+                          Deployed responsive contact forms with AWS Amplify and Lambda for 
+                          Vaishnaoi Group
                         </p>
                       </div>
                     </div>
@@ -1221,8 +1298,8 @@ export default function Portfolio() {
           </motion.div>
 
           {/* Projects Grid with 3D Effects */}
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-            {/* Salesastra CRM - Enhanced */}
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+            {/* SalesAstra: Omni-Channel Messaging */}
             <motion.div
               initial={{ opacity: 0, y: 50, rotateX: 15 }}
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -1257,7 +1334,7 @@ export default function Portfolio() {
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     </div>
                     <div className="flex-1 bg-gray-700 rounded px-3 py-1 text-xs text-gray-400">
-                      dev-app.salesastra.ai
+                      salesastra.ai
                     </div>
                   </div>
                   {/* Simulated dashboard content */}
@@ -1291,10 +1368,10 @@ export default function Portfolio() {
               <div className="p-6 lg:p-8 relative z-10">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-2xl lg:text-3xl font-bold text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
-                    Gamyam AI CRM
+                    Omni-Channel Messaging
                   </h3>
                   <motion.a
-                    href="https://dev-app.salesastra.ai"
+                    href="https://salesastra.ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -1306,18 +1383,19 @@ export default function Portfolio() {
                 </div>
 
                 <p className="text-gray-300 mb-6 text-sm lg:text-base leading-relaxed">
-                  Lead Management System built with NestJS microservices and
-                  Next.js, supporting 1000+ leads with advanced filtering, task
-                  management, and file handling through AWS S3 integration.
+                  Event-driven messaging architecture supporting WhatsApp,
+                  Instagram, Messenger, and a custom web chatbot — built on AWS Lambda and
+                  Kinesis with real-time delivery via NestJS WebSockets.
                 </p>
 
                 {/* Tech stack with animated badges */}
                 <div className="flex flex-wrap gap-2">
                   {[
                     { name: "NestJS", color: "from-red-500 to-pink-500" },
-                    { name: "Next.js", color: "from-blue-500 to-purple-500" },
-                    { name: "MongoDB", color: "from-green-500 to-emerald-500" },
-                    { name: "AWS S3", color: "from-orange-500 to-red-500" },
+                    { name: "AWS Lambda", color: "from-orange-500 to-yellow-500" },
+                    { name: "Kinesis", color: "from-blue-500 to-purple-500" },
+                    { name: "WebSockets", color: "from-green-500 to-emerald-500" },
+                    { name: "Meta Graph API", color: "from-indigo-500 to-purple-500" },
                   ].map((tech, index) => (
                     <motion.span
                       key={tech.name}
@@ -1334,7 +1412,7 @@ export default function Portfolio() {
               </div>
             </motion.div>
 
-            {/* E-Commerce Backend - Enhanced */}
+            {/* SalesAstra: AI-Assisted CRM Workflows */}
             <motion.div
               initial={{ opacity: 0, y: 50, rotateX: -15 }}
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -1343,159 +1421,41 @@ export default function Portfolio() {
                 rotateX: -5,
                 rotateY: -5,
                 scale: 1.02,
-                boxShadow: "0 25px 50px rgba(139, 92, 246, 0.3)",
-              }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-purple-500/50 transition-all duration-500 transform-gpu"
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              {/* API visualization */}
-              <div className="relative h-48 lg:h-56 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20" />
-                <div className="absolute inset-4 bg-gray-900 rounded-lg border border-gray-600 p-4">
-                  {/* API endpoints visualization */}
-                  <div className="space-y-2">
-                    {[
-                      {
-                        method: "GET",
-                        endpoint: "/api/products",
-                        status: "200",
-                      },
-                      {
-                        method: "POST",
-                        endpoint: "/api/auth/login",
-                        status: "201",
-                      },
-                      {
-                        method: "PUT",
-                        endpoint: "/api/cart/update",
-                        status: "200",
-                      },
-                      {
-                        method: "DELETE",
-                        endpoint: "/api/wishlist",
-                        status: "204",
-                      },
-                    ].map((api, index) => (
-                      <motion.div
-                        key={api.endpoint}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.2 }}
-                        className="flex items-center gap-3 text-xs"
-                      >
-                        <span
-                          className={`px-2 py-1 rounded font-mono ${
-                            api.method === "GET"
-                              ? "bg-green-500/20 text-green-400"
-                              : api.method === "POST"
-                              ? "bg-blue-500/20 text-blue-400"
-                              : api.method === "PUT"
-                              ? "bg-yellow-500/20 text-yellow-400"
-                              : "bg-red-500/20 text-red-400"
-                          }`}
-                        >
-                          {api.method}
-                        </span>
-                        <span className="text-gray-300 font-mono flex-1">
-                          {api.endpoint}
-                        </span>
-                        <span className="text-green-400">{api.status}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="absolute top-4 right-4 flex items-center gap-2 bg-purple-500/20 backdrop-blur-sm rounded-full px-3 py-1 border border-purple-500/30">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                  <span className="text-xs text-purple-400 font-medium">
-                    API
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-6 lg:p-8 relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-2xl lg:text-3xl font-bold text-purple-400 group-hover:text-purple-300 transition-colors duration-300">
-                    E-Commerce Backend
-                  </h3>
-                  <motion.a
-                    href="https://ecommerce-backend-rz03.onrender.com/api-docs"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, rotate: -5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-10 h-10 bg-purple-500/20 hover:bg-purple-500/30 rounded-full flex items-center justify-center transition-all duration-300"
-                  >
-                    <ExternalLink className="w-5 h-5 text-purple-400" />
-                  </motion.a>
-                </div>
-
-                <p className="text-gray-300 mb-6 text-sm lg:text-base leading-relaxed">
-                  Scalable RESTful API architecture powering modern e-commerce
-                  experiences with advanced authentication, real-time inventory,
-                  and optimized performance for 100+ concurrent users.
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    {
-                      name: "Express.js",
-                      color: "from-green-500 to-emerald-500",
-                    },
-                    { name: "MongoDB", color: "from-green-600 to-green-400" },
-                    { name: "Node.js", color: "from-green-500 to-lime-500" },
-                  ].map((tech, index) => (
-                    <motion.span
-                      key={tech.name}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                      className={`px-3 py-1 bg-gradient-to-r ${tech.color} rounded-full text-white text-sm font-medium cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300`}
-                    >
-                      {tech.name}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Book Store Application - Enhanced */}
-            <motion.div
-              initial={{ opacity: 0, y: 50, rotateX: 15 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-              whileHover={{
-                y: -10,
-                rotateX: 5,
-                rotateY: 5,
-                scale: 1.02,
                 boxShadow: "0 25px 50px rgba(34, 197, 94, 0.3)",
               }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
               className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-green-500/50 transition-all duration-500 transform-gpu"
               style={{ transformStyle: "preserve-3d" }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Book store interface mockup */}
+              {/* Dashboard visualization */}
               <div className="relative h-48 lg:h-56 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 to-emerald-600/20" />
                 <div className="absolute inset-4 bg-gray-900 rounded-lg border border-gray-600 p-4">
-                  {/* Book grid simulation */}
-                  <div className="grid grid-cols-4 gap-2">
-                    {[...Array(8)].map((_, i) => (
+                  {/* Workflow steps visualization */}
+                  <div className="space-y-2">
+                    {[
+                      { step: "AI Routing", status: "Active" },
+                      { step: "Session Summary", status: "Active" },
+                      { step: "Lead Capture", status: "Pending" },
+                      { step: "SQS Queue", status: "Processing" },
+                    ].map((workflow, index) => (
                       <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, delay: i * 0.1 }}
-                        className="aspect-[3/4] bg-gradient-to-b from-green-400/30 to-green-600/30 rounded border border-green-500/30"
-                      />
+                        key={workflow.step}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.2 }}
+                        className="flex items-center gap-3 text-xs"
+                      >
+                        <span className="px-2 py-1 rounded font-mono bg-green-500/20 text-green-400">
+                          {workflow.step}
+                        </span>
+                        <span className="text-gray-300 font-mono flex-1">
+                          {workflow.status}
+                        </span>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
@@ -1503,7 +1463,7 @@ export default function Portfolio() {
                 <div className="absolute top-4 right-4 flex items-center gap-2 bg-green-500/20 backdrop-blur-sm rounded-full px-3 py-1 border border-green-500/30">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                   <span className="text-xs text-green-400 font-medium">
-                    CRUD
+                    Live
                   </span>
                 </div>
               </div>
@@ -1511,10 +1471,10 @@ export default function Portfolio() {
               <div className="p-6 lg:p-8 relative z-10">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-2xl lg:text-3xl font-bold text-green-400 group-hover:text-green-300 transition-colors duration-300">
-                    Book Store App
+                    AI-Assisted CRM
                   </h3>
                   <motion.a
-                    href="https://book-store-mern-project-66hw.vercel.app/"
+                    href="https://salesastra.ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -1526,19 +1486,17 @@ export default function Portfolio() {
                 </div>
 
                 <p className="text-gray-300 mb-6 text-sm lg:text-base leading-relaxed">
-                  Full-featured book management system with real-time inventory
-                  tracking, advanced search capabilities, and intuitive CRUD
-                  operations for seamless library management.
+                  AI-driven conversation routing and lead management — dynamic
+                  AI-to-human handoff, automated session summarization, and intelligent lead
+                  capture from external sources.
                 </p>
 
                 <div className="flex flex-wrap gap-2">
                   {[
-                    { name: "React.js", color: "from-blue-500 to-cyan-500" },
-                    {
-                      name: "Express.js",
-                      color: "from-green-500 to-emerald-500",
-                    },
-                    { name: "MongoDB", color: "from-green-600 to-green-400" },
+                    { name: "AWS SQS", color: "from-orange-500 to-yellow-500" },
+                    { name: "MongoDB", color: "from-green-500 to-emerald-500" },
+                    { name: "Meta Graph API", color: "from-blue-500 to-purple-500" },
+                    { name: "NestJS", color: "from-red-500 to-pink-500" },
                   ].map((tech, index) => (
                     <motion.span
                       key={tech.name}
@@ -1555,60 +1513,54 @@ export default function Portfolio() {
               </div>
             </motion.div>
 
-            {/* Weather Application - Enhanced */}
+            {/* SalesAstra: Multi-Tenant Access Control & Infra */}
             <motion.div
-              initial={{ opacity: 0, y: 50, rotateX: -15 }}
+              initial={{ opacity: 0, y: 50, rotateX: 15 }}
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               whileHover={{
                 y: -10,
-                rotateX: -5,
-                rotateY: -5,
+                rotateX: 5,
+                rotateY: 5,
                 scale: 1.02,
                 boxShadow: "0 25px 50px rgba(249, 115, 22, 0.3)",
               }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
               className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-orange-500/50 transition-all duration-500 transform-gpu"
               style={{ transformStyle: "preserve-3d" }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-yellow-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Weather app interface */}
+              {/* Infrastructure mockup */}
               <div className="relative h-48 lg:h-56 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-yellow-600/20" />
                 <div className="absolute inset-4 bg-gray-900 rounded-lg border border-gray-600 p-4">
-                  {/* Weather widget simulation */}
-                  <div className="text-center space-y-2">
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{
-                        duration: 8,
-                        repeat: Number.POSITIVE_INFINITY,
-                        ease: "linear",
-                      }}
-                      className="w-12 h-12 mx-auto bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center"
-                    >
-                      ☀️
-                    </motion.div>
-                    <div className="text-2xl font-bold text-orange-400">
-                      25°C
-                    </div>
-                    <div className="text-sm text-gray-400">Sunny</div>
-                    <div className="flex justify-center gap-2 mt-3">
-                      {["Mon", "Tue", "Wed", "Thu", "Fri"].map((day, i) => (
-                        <div key={day} className="text-xs text-center">
-                          <div className="text-gray-400">{day}</div>
-                          <div className="text-orange-400">{20 + i}°</div>
-                        </div>
-                      ))}
-                    </div>
+                  {/* Architecture layers simulation */}
+                  <div className="space-y-2">
+                    {[
+                      { layer: "RBAC Layer", tech: "Graph-based" },
+                      { layer: "Auth Layer", tech: "AWS Cognito" },
+                      { layer: "API Gateway", tech: "JWT Tokens" },
+                      { layer: "Infrastructure", tech: "Terraform" },
+                    ].map((item, index) => (
+                      <motion.div
+                        key={item.layer}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        className="flex items-center justify-between px-2 py-1 bg-orange-500/10 rounded border border-orange-500/30 text-xs"
+                      >
+                        <span className="text-orange-400 font-medium">{item.layer}</span>
+                        <span className="text-gray-400">{item.tech}</span>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
 
                 <div className="absolute top-4 right-4 flex items-center gap-2 bg-orange-500/20 backdrop-blur-sm rounded-full px-3 py-1 border border-orange-500/30">
                   <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
                   <span className="text-xs text-orange-400 font-medium">
-                    Real-time
+                    Live
                   </span>
                 </div>
               </div>
@@ -1616,13 +1568,13 @@ export default function Portfolio() {
               <div className="p-6 lg:p-8 relative z-10">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-2xl lg:text-3xl font-bold text-orange-400 group-hover:text-orange-300 transition-colors duration-300">
-                    Weather App
+                    Access Control & Infra
                   </h3>
                   <motion.a
-                    href="https://weather-app-pi-six-50.vercel.app/"
+                    href="https://salesastra.ai"
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, rotate: -5 }}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
                     className="w-10 h-10 bg-orange-500/20 hover:bg-orange-500/30 rounded-full flex items-center justify-center transition-all duration-300"
                   >
@@ -1631,19 +1583,17 @@ export default function Portfolio() {
                 </div>
 
                 <p className="text-gray-300 mb-6 text-sm lg:text-base leading-relaxed">
-                  Intelligent weather forecasting application with
-                  location-based services, real-time updates, and comprehensive
-                  error handling for reliable global weather data.
+                  Fine-grained, graph-based RBAC system shared across
+                  microservices, with multi-tenant branding and infrastructure-as-code
+                  deployment with AWS Cognito and Terraform.
                 </p>
 
                 <div className="flex flex-wrap gap-2">
                   {[
-                    { name: "React.js", color: "from-blue-500 to-cyan-500" },
-                    {
-                      name: "Weather API",
-                      color: "from-orange-500 to-yellow-500",
-                    },
-                    { name: "CSS3", color: "from-pink-500 to-purple-500" },
+                    { name: "AWS Cognito", color: "from-orange-500 to-yellow-500" },
+                    { name: "Terraform", color: "from-purple-500 to-pink-500" },
+                    { name: "GitHub Actions", color: "from-gray-500 to-gray-700" },
+                    { name: "AWS OpenSearch", color: "from-yellow-500 to-orange-500" },
                   ].map((tech, index) => (
                     <motion.span
                       key={tech.name}
