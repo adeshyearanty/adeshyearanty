@@ -7,10 +7,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Adesh Yearanty - Full-Stack Developer",
   description:
-    "Portfolio of Yearanty Sri Sai Adesh - Full-Stack Developer and Computer Science Engineer",
+    "Portfolio of Adesh Yearanty - Full-Stack Developer specializing in event-driven systems, multi-tenant architecture, and distributed systems.",
   keywords:
-    "Full-Stack Developer, React, Next.js, NestJS, JavaScript, TypeScript, Portfolio",
-  authors: [{ name: "Yearanty Sri Sai Adesh" }],
+    "Full-Stack Developer, React, Next.js, NestJS, JavaScript, TypeScript, Portfolio, Systems Design, Architecture",
+  authors: [{ name: "Adesh Yearanty" }],
+  creator: "Adesh Yearanty",
   icons: {
     icon: [
       { url: "/favicon.ico" },
