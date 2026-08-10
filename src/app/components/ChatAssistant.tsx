@@ -321,11 +321,7 @@ export default function ChatAssistant() {
                       aria-label="Send message"
                       id="chat-send-button"
                     >
-                      {isStreaming ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <Send className="w-4 h-4" />
-                      )}
+                      <Send className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
@@ -341,6 +337,7 @@ export default function ChatAssistant() {
 function MessageBubble({ message }: { message: ChatMessage }) {
   const isUser = message.role === 'USER';
   const isFailed = message.status === 'FAILED';
+  const isStreamingMsg = message.status === 'STREAMING';
 
   return (
     <motion.div
@@ -383,15 +380,19 @@ function MessageBubble({ message }: { message: ChatMessage }) {
           <div className="prose prose-invert prose-sm max-w-none chat-markdown">
             {message.content ? (
               <ReactMarkdown>{message.content}</ReactMarkdown>
-            ) : message.status === 'STREAMING' ? (
-              <span className="inline-flex items-center gap-1 text-gray-400">
+            ) : null}
+            {isStreamingMsg && message.content.length > 0 && (
+              <span className="inline-block w-1.5 h-3.5 bg-[#d8b26a] ml-0.5 animate-pulse align-middle" />
+            )}
+            {isStreamingMsg && message.content.length === 0 && (
+              <div className="flex items-center gap-1.5 py-1 px-0.5">
                 <span className="typing-dots">
                   <span className="dot" />
                   <span className="dot" />
                   <span className="dot" />
                 </span>
-              </span>
-            ) : null}
+              </div>
+            )}
           </div>
         )}
         {isFailed && (

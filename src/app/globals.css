@@ -101,12 +101,14 @@
   background: transparent;
 }
 
-.chat-markdown strong {
-  color: #c4b5fd;
+.chat-markdown strong,
+.chat-markdown b {
+  color: #d8b26a;
+  font-weight: 600;
 }
 
 .chat-markdown a {
-  color: #60a5fa;
+  color: #d8b26a;
   text-decoration: underline;
 }
 
@@ -121,7 +123,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #6b7280;
+  background: #d8b26a;
   animation: typingBounce 1.2s infinite ease-in-out;
 }
 

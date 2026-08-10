@@ -123,47 +123,74 @@ export function useChat() {
       setIsConnected(false);
     });
 
-    socket.on('message:start', (data: { messageId: string; sessionId: string }) => {
-      streamingMessageIdRef.current = data.messageId;
-      streamingContentRef.current = '';
-      setIsStreaming(true);
+    socket.on(
+      'message:start',
+      (data: { sessionId: string; messageId: string; role: string }) => {
+        streamingMessageIdRef.current = data.messageId;
+        streamingContentRef.current = '';
+        setIsStreaming(true);
 
-      const newMsg: ChatMessage = {
-        id: data.messageId,
-        role: 'ASSISTANT',
-        content: '',
-        status: 'STREAMING',
-        createdAt: new Date().toISOString(),
-      };
+        const newMsg: ChatMessage = {
+          id: data.messageId,
+          role: 'ASSISTANT',
+          content: '',
+          status: 'STREAMING',
+          createdAt: new Date().toISOString(),
+        };
 
-      setMessages((prev) => {
-        if (messageIdsRef.current.has(data.messageId)) return prev;
-        messageIdsRef.current.add(data.messageId);
-        return [...prev, newMsg];
-      });
-    });
+        setMessages((prev) => {
+          if (messageIdsRef.current.has(data.messageId)) return prev;
+          messageIdsRef.current.add(data.messageId);
+          return [...prev, newMsg];
+        });
+      },
+    );
 
-    socket.on('message:chunk', (data: { chunk: string }) => {
-      streamingContentRef.current += data.chunk;
-      const currentContent = streamingContentRef.current;
-      const currentId = streamingMessageIdRef.current;
+    socket.on(
+      'message:chunk',
+      (data: { sessionId: string; messageId: string; chunk: string }) => {
+        const targetId = data.messageId || streamingMessageIdRef.current;
+        if (!targetId) return;
 
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.id === currentId
-            ? { ...m, content: currentContent }
-            : m,
-        ),
-      );
-    });
+        setMessages((prev) => {
+          const exists = prev.some((m) => m.id === targetId);
+          if (!exists) {
+            messageIdsRef.current.add(targetId);
+            const newMsg: ChatMessage = {
+              id: targetId,
+              role: 'ASSISTANT',
+              content: data.chunk,
+              status: 'STREAMING',
+              createdAt: new Date().toISOString(),
+            };
+            return [...prev, newMsg];
+          }
+          return prev.map((m) =>
+            m.id === targetId ? { ...m, content: m.content + data.chunk } : m,
+          );
+        });
+
+        if (targetId === streamingMessageIdRef.current) {
+          streamingContentRef.current += data.chunk;
+        }
+      },
+    );
 
     socket.on(
       'message:complete',
-      (data: { messageId: string; sessionId: string; content: string }) => {
+      (data: {
+        sessionId: string;
+        messageId: string;
+        content: string;
+      }) => {
         setMessages((prev) =>
           prev.map((m) =>
             m.id === data.messageId
-              ? { ...m, content: data.content, status: 'COMPLETED' as const }
+              ? {
+                  ...m,
+                  content: data.content,
+                  status: 'COMPLETED' as const,
+                }
               : m,
           ),
         );
@@ -182,7 +209,11 @@ export function useChat() {
 
     socket.on(
       'message:error',
-      (data: { messageId: string | null; sessionId: string; error: string }) => {
+      (data: {
+        sessionId: string;
+        messageId: string | null;
+        error: string;
+      }) => {
         if (data.messageId) {
           setMessages((prev) =>
             prev.map((m) =>
@@ -199,7 +230,7 @@ export function useChat() {
     );
 
     // On reconnect, restore from MongoDB
-    socket.on('reconnect', async () => {
+    socket.io.on('reconnect', async () => {
       const currentSessionId = getStoredSessionId();
       if (currentSessionId && visitorId) {
         try {
@@ -211,7 +242,9 @@ export function useChat() {
             status: m.status,
             createdAt: m.createdAt,
           }));
-          messageIdsRef.current = new Set(restoredMessages.map((m: ChatMessage) => m.id));
+          messageIdsRef.current = new Set(
+            restoredMessages.map((m: ChatMessage) => m.id),
+          );
           setMessages(restoredMessages);
           setIsStreaming(false);
         } catch {
