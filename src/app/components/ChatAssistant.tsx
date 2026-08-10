@@ -17,6 +17,8 @@ import {
   WifiOff,
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 import { useChat, ChatMessage } from '../hooks/useChat';
 
 export default function ChatAssistant() {
@@ -379,7 +381,9 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         ) : (
           <div className="prose prose-invert prose-sm max-w-none chat-markdown">
             {message.content ? (
-              <ReactMarkdown>{message.content}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+                {message.content}
+              </ReactMarkdown>
             ) : null}
             {isStreamingMsg && message.content.length > 0 && (
               <span className="inline-block w-1.5 h-3.5 bg-[#d8b26a] ml-0.5 animate-pulse align-middle" />
