@@ -25,6 +25,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import ChatAssistant from "./components/ChatAssistant";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -1914,6 +1915,9 @@ export default function Portfolio() {
           </motion.p>
         </div>
       </footer>
+
+      {/* AI Chat Assistant */}
+      <ChatAssistant />
     </div>
   );
 }
