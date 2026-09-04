@@ -14,8 +14,8 @@ const WHATSAPP =
 
 const CHANNELS = [
   ...socials,
-  { label: "Phone", value: profile.phone, href: `tel:+919700015263` },
-  { label: "WhatsApp", value: "+91 97000 15263", href: WHATSAPP },
+  { label: "Phone", value: profile.phone, href: `tel:+919281173006` },
+  { label: "WhatsApp", value: "+91 92811 73006", href: WHATSAPP },
 ];
 
 const EXPECT = [
@@ -40,7 +40,7 @@ export default function ContactPage() {
 
       <Section>
         <Container className="py-16 lg:py-24">
-          <div className="grid gap-16 lg:grid-cols-[1.2fr_1fr]">
+          <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
             <Reveal>
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-slate">
@@ -48,12 +48,12 @@ export default function ContactPage() {
                 </p>
                 <a
                   href={`mailto:${profile.email}`}
-                  className="group mt-4 block text-balance text-3xl font-semibold tracking-tight text-paper transition-colors hover:text-signal sm:text-5xl"
+                  className="group mt-4 inline-flex max-w-full items-center gap-2 text-xl font-semibold tracking-tight text-paper transition-colors hover:text-signal sm:gap-3 sm:text-3xl md:text-4xl lg:text-[2.4rem] xl:text-[2.75rem]"
                 >
-                  {profile.email}
+                  <span className="truncate">{profile.email}</span>
                   <span
                     aria-hidden
-                    className="ml-3 inline-block text-signal transition-transform duration-300 group-hover:translate-x-1"
+                    className="shrink-0 text-signal transition-transform duration-300 group-hover:translate-x-1"
                   >
                     →
                   </span>

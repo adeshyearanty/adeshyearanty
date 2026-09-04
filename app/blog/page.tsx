@@ -11,21 +11,12 @@ export const metadata: Metadata = {
 
 const POSTS = [
   {
-    slug: "securing-admin-access-dual-header-impersonation",
-    title: "Securing administrative access with a dual-header impersonation framework",
+    slug: "tenant-discovery-authentication-cognito",
+    title: "When tenant discovery and authentication depend on each other",
     excerpt:
-      "Separating user authentication from dynamic authorization overlays. A deep dive into the dual-header architecture that enables secure administrator impersonation under AWS Cognito.",
-    date: "Aug 2026",
-    readingTime: "6 min",
-    category: "Systems",
-  },
-  {
-    slug: "kinesis-vs-sqs-messaging-pipeline",
-    title: "Why I chose Kinesis over SQS for the messaging pipeline",
-    excerpt:
-      "SQS is the default choice. Kinesis was the right one — but only because of one constraint: conversation ordering. A look at the tradeoff and the partitioning strategy that made it work.",
-    date: "Jun 2025",
-    readingTime: "7 min",
+      "In multi-tenant SaaS, you cannot select an identity provider until you know the tenant, but you cannot identify the tenant until the user authenticates. How we broke the dependency with a dual-login discovery architecture.",
+    date: "Jan 2025",
+    readingTime: "9 min",
     category: "Architecture",
   },
   {
@@ -33,8 +24,17 @@ const POSTS = [
     title: "Designing a RBAC system that doesn't lie to your users",
     excerpt:
       "Scope-based permissions sound simple until you model a hierarchy and add sharing rules. How I built a graph-based permission layer that stays consistent across microservices.",
-    date: "May 2025",
+    date: "Mar 2025",
     readingTime: "5 min",
+    category: "Systems",
+  },
+  {
+    slug: "securing-admin-access-dual-header-impersonation",
+    title: "Securing administrative access with a dual-header impersonation framework",
+    excerpt:
+      "Separating user authentication from dynamic authorization overlays. A deep dive into the dual-header architecture that enables secure administrator impersonation under AWS Cognito.",
+    date: "May 2025",
+    readingTime: "6 min",
     category: "Systems",
   },
   {
@@ -42,9 +42,45 @@ const POSTS = [
     title: "Redis version-based caching: a simpler way to invalidate",
     excerpt:
       "TTL-based expiry is unpredictable and cache-busting is ugly. Version-based caching gives you instant, controlled invalidation without either. Here's how it works in practice.",
-    date: "Apr 2025",
+    date: "Jul 2025",
     readingTime: "6 min",
     category: "Backend",
+  },
+  {
+    slug: "designing-tenant-aware-opensearch-architecture",
+    title: "Designing a tenant-aware OpenSearch architecture for search and duplicate detection",
+    excerpt:
+      "When search moves from a UI convenience to data integrity, the architecture changes. How we built a tenant-scoped OpenSearch system for candidate generation, index versioning, and relevance scoring.",
+    date: "Oct 2025",
+    readingTime: "10 min",
+    category: "Architecture",
+  },
+  {
+    slug: "designing-pulse-omnichannel-messaging-architecture",
+    title: "Designing Pulse: a real-time omnichannel messaging architecture",
+    excerpt:
+      "A deep architecture case study on unifying WhatsApp, Instagram, Messenger, and Web Chat under a single system of record. How we separated commands from events, built on Kinesis, and decoupled fast-path UI delivery from async enrichment.",
+    date: "Jan 2026",
+    readingTime: "14 min",
+    category: "Architecture",
+  },
+  {
+    slug: "kinesis-vs-sqs-messaging-pipeline",
+    title: "Why I chose Kinesis over SQS for the messaging pipeline",
+    excerpt:
+      "SQS is the default choice. Kinesis was the right one — but only because of one constraint: conversation ordering. A look at the tradeoff and the partitioning strategy that made it work.",
+    date: "Mar 2026",
+    readingTime: "7 min",
+    category: "Architecture",
+  },
+  {
+    slug: "whatsapp-otp-workflow-verification",
+    title: "Why WhatsApp OTP became a workflow boundary, not just a verification step",
+    excerpt:
+      "Data completeness does not imply action authorization. In an automated conversational CRM, verification is not just an authentication check — it is a gate that governs which automated downstream actions are permitted to execute.",
+    date: "May 2026",
+    readingTime: "11 min",
+    category: "Architecture",
   },
 ];
 
@@ -103,7 +139,7 @@ export default function BlogPage() {
                 Topics covered
               </p>
               <div className="flex flex-wrap gap-2">
-                {["Architecture", "Systems", "Backend", "Event-driven", "AWS", "Redis", "RBAC"].map((tag) => (
+                {["Architecture", "Systems", "Backend", "Event-driven", "AWS", "Cognito", "Redis", "RBAC", "OpenSearch"].map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full border border-hairline px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-mist"

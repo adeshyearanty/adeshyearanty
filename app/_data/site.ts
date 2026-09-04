@@ -14,7 +14,7 @@ export const profile = {
   tagline:
     "Associate Full Stack Engineer with 1.5+ years of experience building production-grade multi-tenant SaaS platforms using NestJS, Next.js, and AWS. Experienced in designing event-driven microservices, real-time messaging systems, fine-grained RBAC, AI-assisted workflows, infrastructure automation, and cloud-native architectures. Passionate about building scalable backend systems that remain reliable under high throughput.",
   email: "adesh.yearanty@gmail.com",
-  phone: "+91 97000 15263",
+  phone: "+91 92811 73006",
 } as const;
 
 export const socials = [

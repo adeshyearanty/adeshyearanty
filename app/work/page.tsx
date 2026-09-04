@@ -56,13 +56,44 @@ export default function WorkPage() {
                       {p.slug === "omni-channel-messaging" && (
                         <div className="mt-6 flex flex-col gap-2">
                           <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Related writing</span>
-                          <Link
-                            href="/blog/kinesis-vs-sqs-messaging-pipeline"
-                            className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
-                          >
-                            <span>→</span>
-                            <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Why I chose Kinesis over SQS</span>
-                          </Link>
+                          <div className="flex flex-col gap-2">
+                            <Link
+                              href="/blog/designing-pulse-omnichannel-messaging-architecture"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Designing Pulse: a real-time omnichannel messaging architecture</span>
+                            </Link>
+                            <Link
+                              href="/blog/kinesis-vs-sqs-messaging-pipeline"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Why I chose Kinesis over SQS</span>
+                            </Link>
+                            <Link
+                              href="/blog/whatsapp-otp-workflow-verification"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Why WhatsApp OTP became a workflow boundary</span>
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+
+                      {p.slug === "ai-assisted-workflows" && (
+                        <div className="mt-6 flex flex-col gap-2">
+                          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Related writing</span>
+                          <div className="flex flex-col gap-2">
+                            <Link
+                              href="/blog/whatsapp-otp-workflow-verification"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Why WhatsApp OTP became a workflow boundary</span>
+                            </Link>
+                          </div>
                         </div>
                       )}
 
@@ -71,11 +102,11 @@ export default function WorkPage() {
                           <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Related writing</span>
                           <div className="flex flex-col gap-2">
                             <Link
-                              href="/blog/securing-admin-access-dual-header-impersonation"
+                              href="/blog/tenant-discovery-authentication-cognito"
                               className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
                             >
                               <span>→</span>
-                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Securing admin access with dual-header impersonation</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">When tenant discovery and authentication depend on each other</span>
                             </Link>
                             <Link
                               href="/blog/rbac-system-that-doesnt-lie"
@@ -85,11 +116,25 @@ export default function WorkPage() {
                               <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Designing a RBAC system that doesn&apos;t lie</span>
                             </Link>
                             <Link
+                              href="/blog/securing-admin-access-dual-header-impersonation"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Securing admin access with dual-header impersonation</span>
+                            </Link>
+                            <Link
                               href="/blog/redis-version-based-caching"
                               className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
                             >
                               <span>→</span>
                               <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Redis version-based caching</span>
+                            </Link>
+                            <Link
+                              href="/blog/designing-tenant-aware-opensearch-architecture"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Designing a tenant-aware OpenSearch architecture</span>
                             </Link>
                           </div>
                         </div>
