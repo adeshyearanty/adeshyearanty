@@ -1,30 +1,31 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { io, Socket } from 'socket.io-client';
+import { useState, useEffect, useCallback, useRef } from "react";
+import { io, type Socket } from "socket.io-client";
 import {
   createSession,
   getConversation,
   getSessions,
   deleteSession as deleteSessionApi,
-  SessionListItem,
-  MessageResponse,
-} from '@/lib/chatApi';
+  type SessionListItem,
+  type MessageResponse,
+} from "@/app/_lib/chat-api";
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3000';
-const VISITOR_ID_KEY = 'portfolio_visitor_id';
-const SESSION_ID_KEY = 'portfolio_chat_session_id';
+const SOCKET_URL =
+  process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:3000";
+const VISITOR_ID_KEY = "portfolio_visitor_id";
+const SESSION_ID_KEY = "portfolio_chat_session_id";
 
-export interface ChatMessage {
+export type ChatMessage = {
   id: string;
-  role: 'USER' | 'ASSISTANT';
+  role: "USER" | "ASSISTANT";
   content: string;
-  status: 'STREAMING' | 'COMPLETED' | 'FAILED';
+  status: "STREAMING" | "COMPLETED" | "FAILED";
   createdAt: string;
-}
+};
 
 function getOrCreateVisitorId(): string {
-  if (typeof window === 'undefined') return '';
+  if (typeof window === "undefined") return "";
   let id = localStorage.getItem(VISITOR_ID_KEY);
   if (!id) {
     id = crypto.randomUUID();
@@ -34,12 +35,12 @@ function getOrCreateVisitorId(): string {
 }
 
 function getStoredSessionId(): string | null {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
   return localStorage.getItem(SESSION_ID_KEY);
 }
 
 function setStoredSessionId(id: string | null): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
   if (id) {
     localStorage.setItem(SESSION_ID_KEY, id);
   } else {
@@ -48,7 +49,7 @@ function setStoredSessionId(id: string | null): void {
 }
 
 export function useChat() {
-  const [visitorId, setVisitorId] = useState('');
+  const [visitorId, setVisitorId] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [sessions, setSessions] = useState<SessionListItem[]>([]);
@@ -57,7 +58,7 @@ export function useChat() {
   const [isLoading, setIsLoading] = useState(true);
 
   const socketRef = useRef<Socket | null>(null);
-  const streamingContentRef = useRef('');
+  const streamingContentRef = useRef("");
   const streamingMessageIdRef = useRef<string | null>(null);
   const messageIdsRef = useRef(new Set<string>());
 
@@ -73,15 +74,19 @@ export function useChat() {
         if (storedSessionId) {
           const conv = await getConversation(storedSessionId, vid);
           setSessionId(storedSessionId);
-          const restoredMessages = conv.messages.map((m: MessageResponse) => ({
-            id: m.id,
-            role: m.role,
-            content: m.content,
-            status: m.status,
-            createdAt: m.createdAt,
-          }));
+          const restoredMessages: ChatMessage[] = conv.messages.map(
+            (m: MessageResponse) => ({
+              id: m.id,
+              role: m.role,
+              content: m.content,
+              status: m.status,
+              createdAt: m.createdAt,
+            })
+          );
           setMessages(restoredMessages);
-          messageIdsRef.current = new Set(restoredMessages.map((m: ChatMessage) => m.id));
+          messageIdsRef.current = new Set(
+            restoredMessages.map((m) => m.id)
+          );
         }
       } catch {
         // Session no longer valid, clear it
@@ -106,7 +111,7 @@ export function useChat() {
     if (!visitorId) return;
 
     const socket = io(`${SOCKET_URL}/chat`, {
-      transports: ['websocket', 'polling'],
+      transports: ["websocket", "polling"],
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
@@ -115,39 +120,40 @@ export function useChat() {
 
     socketRef.current = socket;
 
-    socket.on('connect', () => {
+    socket.on("connect", () => {
       setIsConnected(true);
     });
 
-    socket.on('disconnect', () => {
+    socket.on("disconnect", () => {
       setIsConnected(false);
     });
 
     socket.on(
-      'message:start',
+      "message:start",
       (data: { sessionId: string; messageId: string; role: string }) => {
         streamingMessageIdRef.current = data.messageId;
-        streamingContentRef.current = '';
+        streamingContentRef.current = "";
         setIsStreaming(true);
 
         const newMsg: ChatMessage = {
           id: data.messageId,
-          role: 'ASSISTANT',
-          content: '',
-          status: 'STREAMING',
+          role: "ASSISTANT",
+          content: "",
+          status: "STREAMING",
           createdAt: new Date().toISOString(),
         };
 
         setMessages((prev) => {
+          // Deduplicate by messageId
           if (messageIdsRef.current.has(data.messageId)) return prev;
           messageIdsRef.current.add(data.messageId);
           return [...prev, newMsg];
         });
-      },
+      }
     );
 
     socket.on(
-      'message:chunk',
+      "message:chunk",
       (data: { sessionId: string; messageId: string; chunk: string }) => {
         const targetId = data.messageId || streamingMessageIdRef.current;
         if (!targetId) return;
@@ -158,26 +164,26 @@ export function useChat() {
             messageIdsRef.current.add(targetId);
             const newMsg: ChatMessage = {
               id: targetId,
-              role: 'ASSISTANT',
+              role: "ASSISTANT",
               content: data.chunk,
-              status: 'STREAMING',
+              status: "STREAMING",
               createdAt: new Date().toISOString(),
             };
             return [...prev, newMsg];
           }
           return prev.map((m) =>
-            m.id === targetId ? { ...m, content: m.content + data.chunk } : m,
+            m.id === targetId ? { ...m, content: m.content + data.chunk } : m
           );
         });
 
         if (targetId === streamingMessageIdRef.current) {
           streamingContentRef.current += data.chunk;
         }
-      },
+      }
     );
 
     socket.on(
-      'message:complete',
+      "message:complete",
       (data: {
         sessionId: string;
         messageId: string;
@@ -189,14 +195,14 @@ export function useChat() {
               ? {
                   ...m,
                   content: data.content,
-                  status: 'COMPLETED' as const,
+                  status: "COMPLETED" as const,
                 }
-              : m,
-          ),
+              : m
+          )
         );
         setIsStreaming(false);
         streamingMessageIdRef.current = null;
-        streamingContentRef.current = '';
+        streamingContentRef.current = "";
 
         // Refresh sessions list to update lastMessageAt
         if (visitorId) {
@@ -204,11 +210,11 @@ export function useChat() {
             .then(setSessions)
             .catch(() => {});
         }
-      },
+      }
     );
 
     socket.on(
-      'message:error',
+      "message:error",
       (data: {
         sessionId: string;
         messageId: string | null;
@@ -218,32 +224,34 @@ export function useChat() {
           setMessages((prev) =>
             prev.map((m) =>
               m.id === data.messageId
-                ? { ...m, status: 'FAILED' as const }
-                : m,
-            ),
+                ? { ...m, status: "FAILED" as const }
+                : m
+            )
           );
         }
         setIsStreaming(false);
         streamingMessageIdRef.current = null;
-        streamingContentRef.current = '';
-      },
+        streamingContentRef.current = "";
+      }
     );
 
     // On reconnect, restore from MongoDB
-    socket.io.on('reconnect', async () => {
+    socket.io.on("reconnect", async () => {
       const currentSessionId = getStoredSessionId();
       if (currentSessionId && visitorId) {
         try {
           const conv = await getConversation(currentSessionId, visitorId);
-          const restoredMessages = conv.messages.map((m: MessageResponse) => ({
-            id: m.id,
-            role: m.role,
-            content: m.content,
-            status: m.status,
-            createdAt: m.createdAt,
-          }));
+          const restoredMessages: ChatMessage[] = conv.messages.map(
+            (m: MessageResponse) => ({
+              id: m.id,
+              role: m.role,
+              content: m.content,
+              status: m.status,
+              createdAt: m.createdAt,
+            })
+          );
           messageIdsRef.current = new Set(
-            restoredMessages.map((m: ChatMessage) => m.id),
+            restoredMessages.map((m) => m.id)
           );
           setMessages(restoredMessages);
           setIsStreaming(false);
@@ -277,13 +285,13 @@ export function useChat() {
         }
       }
 
-      // Add user message to UI immediately
+      // Add user message to UI immediately (optimistic)
       const userMsgId = crypto.randomUUID();
       const userMsg: ChatMessage = {
         id: userMsgId,
-        role: 'USER',
+        role: "USER",
         content: text,
-        status: 'COMPLETED',
+        status: "COMPLETED",
         createdAt: new Date().toISOString(),
       };
 
@@ -292,14 +300,14 @@ export function useChat() {
 
       // Send via WebSocket
       if (socketRef.current?.connected) {
-        socketRef.current.emit('message:send', {
+        socketRef.current.emit("message:send", {
           sessionId: currentSessionId,
           visitorId,
           message: text,
         });
       }
     },
-    [visitorId, sessionId, isStreaming],
+    [visitorId, sessionId, isStreaming]
   );
 
   const startNewConversation = useCallback(() => {
@@ -308,7 +316,7 @@ export function useChat() {
     setMessages([]);
     messageIdsRef.current.clear();
     streamingMessageIdRef.current = null;
-    streamingContentRef.current = '';
+    streamingContentRef.current = "";
     setIsStreaming(false);
   }, []);
 
@@ -321,14 +329,18 @@ export function useChat() {
         const conv = await getConversation(targetSessionId, visitorId);
         setSessionId(targetSessionId);
         setStoredSessionId(targetSessionId);
-        const restoredMessages = conv.messages.map((m: MessageResponse) => ({
-          id: m.id,
-          role: m.role,
-          content: m.content,
-          status: m.status,
-          createdAt: m.createdAt,
-        }));
-        messageIdsRef.current = new Set(restoredMessages.map((m: ChatMessage) => m.id));
+        const restoredMessages: ChatMessage[] = conv.messages.map(
+          (m: MessageResponse) => ({
+            id: m.id,
+            role: m.role,
+            content: m.content,
+            status: m.status,
+            createdAt: m.createdAt,
+          })
+        );
+        messageIdsRef.current = new Set(
+          restoredMessages.map((m) => m.id)
+        );
         setMessages(restoredMessages);
         setIsStreaming(false);
       } catch {
@@ -337,7 +349,7 @@ export function useChat() {
         setIsLoading(false);
       }
     },
-    [visitorId],
+    [visitorId]
   );
 
   const deleteConversation = useCallback(
@@ -347,19 +359,17 @@ export function useChat() {
       try {
         await deleteSessionApi(targetSessionId, visitorId);
 
-        // If deleting the current session, clear state
         if (targetSessionId === sessionId) {
           startNewConversation();
         }
 
-        // Refresh sessions list
         const sessionList = await getSessions(visitorId);
         setSessions(sessionList);
       } catch {
         // Ignore delete errors
       }
     },
-    [visitorId, sessionId, startNewConversation],
+    [visitorId, sessionId, startNewConversation]
   );
 
   const refreshSessions = useCallback(async () => {

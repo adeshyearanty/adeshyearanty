@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   Design tokens — dark editorial system with a single restrained accent.
+   Exposed to Tailwind via @theme so utilities like `bg-base`, `text-paper`,
+   `border-hairline`, `text-signal` are generated automatically.
+---------------------------------------------------------------------------- */
+@theme {
+  --color-base: #09090b;
+  --color-surface: #0e0e10;
+  --color-surface-2: #141417;
+  --color-paper: #f5f4f1;
+  --color-mist: #cecdc8;
+  --color-slate: #8d8d95;
+  --color-hairline: rgba(255, 255, 255, 0.09);
+  --color-hairline-strong: rgba(255, 255, 255, 0.16);
+  --color-signal: #d8b26a;
+  --color-signal-soft: rgba(216, 178, 106, 0.12);
+
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-mono: var(--font-mono-geist), ui-monospace, SFMono-Regular, monospace;
+
+  --shadow-premium: 0 40px 80px -40px rgba(0, 0, 0, 0.85);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-base);
+    color: var(--color-slate);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: #0a0a0a;
+  }
+
+  /* Thin, dark scrollbar to match the editorial mood */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Scroll-reveal primitive. Elements with [data-reveal] start hidden and fade
+   up once they enter the viewport (toggled by the <Reveal> client component).
+---------------------------------------------------------------------------- */
+@layer utilities {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Subtle dotted grid texture used behind technical sections */
+  .grid-texture {
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Chat Assistant Markdown formatting & gold highlighting
+---------------------------------------------------------------------------- */
+.chat-markdown {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-mist);
+}
+
+.chat-markdown p {
+  margin: 0.35em 0;
+}
+
+.chat-markdown p:first-child {
+  margin-top: 0;
+}
+
+.chat-markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.chat-markdown strong,
+.chat-markdown b {
+  color: var(--color-signal, #d8b26a);
+  font-weight: 600;
+}
+
+.chat-markdown ul,
+.chat-markdown ol {
+  margin: 0.4em 0;
+  padding-left: 1.25em;
+}
+
+.chat-markdown ul {
+  list-style-type: disc;
+}
+
+.chat-markdown ol {
+  list-style-type: decimal;
+}
+
+.chat-markdown li {
+  margin: 0.2em 0;
+}
+
+.chat-markdown li::marker {
+  color: var(--color-signal, #d8b26a);
+}
+
+.chat-markdown code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--color-hairline);
+  color: var(--color-paper);
+}
+
+.chat-markdown pre {
+  margin: 0.5em 0;
+  padding: 0.75em;
+  border-radius: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  overflow-x: auto;
+}
+
+.chat-markdown pre code {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.chat-markdown a {
+  color: var(--color-signal, #d8b26a);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.chat-markdown a:hover {
+  color: var(--color-paper);
+}
+
