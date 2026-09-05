@@ -182,3 +182,34 @@
   color: var(--color-paper);
 }
 
+/* ----------------------------------------------------------------------------
+   SVG Architecture Diagram Colors & Utilities
+---------------------------------------------------------------------------- */
+.breakout-diagram svg {
+  color-scheme: dark;
+}
+
+.breakout-diagram svg text {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+.fill-paper { fill: var(--color-paper, #f5f4f1) !important; }
+.fill-mist { fill: var(--color-mist, #cecdc8) !important; }
+.fill-slate { fill: var(--color-slate, #8d8d95) !important; }
+.fill-signal { fill: var(--color-signal, #d8b26a) !important; }
+
+.stroke-signal { stroke: var(--color-signal, #d8b26a) !important; }
+.stroke-hairline { stroke: var(--color-hairline, rgba(255, 255, 255, 0.09)) !important; }
+.stroke-hairline-strong { stroke: var(--color-hairline-strong, rgba(255, 255, 255, 0.16)) !important; }
+
+.text-\[6\.5px\] { font-size: 6.5px !important; }
+.text-\[7px\] { font-size: 7px !important; }
+.text-\[7\.5px\] { font-size: 7.5px !important; }
+.text-\[8px\] { font-size: 8px !important; }
+.text-\[8\.5px\] { font-size: 8.5px !important; }
+.text-\[9px\] { font-size: 9px !important; }
+.text-\[9\.5px\] { font-size: 9.5px !important; }
+.text-\[10px\] { font-size: 10px !important; }
+.text-\[10\.5px\] { font-size: 10.5px !important; }
+.text-\[11px\] { font-size: 11px !important; }
+

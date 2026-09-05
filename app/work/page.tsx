@@ -78,6 +78,34 @@ export default function WorkPage() {
                               <span>→</span>
                               <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Why WhatsApp OTP became a workflow boundary</span>
                             </Link>
+                            <Link
+                              href="/blog/engagement-history-isnt-conversation-ownership"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Engagement history isn&apos;t conversation ownership</span>
+                            </Link>
+                            <Link
+                              href="/blog/api-success-doesnt-mean-message-delivered"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">A successful API request doesn&apos;t mean your message was delivered</span>
+                            </Link>
+                            <Link
+                              href="/blog/exactly-once-delivery-is-a-trap"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Exactly-once delivery is a trap</span>
+                            </Link>
+                            <Link
+                              href="/blog/who-owns-the-truth-distributed-system"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">In a distributed system, who owns the truth?</span>
+                            </Link>
                           </div>
                         </div>
                       )}
@@ -92,6 +120,13 @@ export default function WorkPage() {
                             >
                               <span>→</span>
                               <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Why WhatsApp OTP became a workflow boundary</span>
+                            </Link>
+                            <Link
+                              href="/blog/ai-shouldnt-authorize-actions"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">AI can suggest the action. It shouldn&apos;t authorize the action.</span>
                             </Link>
                           </div>
                         </div>
@@ -135,6 +170,48 @@ export default function WorkPage() {
                             >
                               <span>→</span>
                               <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Designing a tenant-aware OpenSearch architecture</span>
+                            </Link>
+                            <Link
+                              href="/blog/ownership-is-not-a-permission"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Ownership Is Not a Permission</span>
+                            </Link>
+                            <Link
+                              href="/blog/search-became-a-data-integrity-problem"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Search Became a Data Integrity Problem</span>
+                            </Link>
+                            <Link
+                              href="/blog/similarity-is-not-probability"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Similarity Is Not Probability</span>
+                            </Link>
+                            <Link
+                              href="/blog/tenant-isolation-doesnt-end-at-the-database"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Tenant Isolation Doesn't End at the Database</span>
+                            </Link>
+                            <Link
+                              href="/blog/database-transaction-doesnt-make-system-atomic"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">A Database Transaction Doesn't Make Your System Atomic</span>
+                            </Link>
+                            <Link
+                              href="/blog/persist-first-broadcast-second"
+                              className="inline-flex items-center gap-1.5 text-[13px] text-mist transition-colors hover:text-signal"
+                            >
+                              <span>→</span>
+                              <span className="underline decoration-hairline-strong underline-offset-4 hover:decoration-signal">Persist First, Broadcast Second</span>
                             </Link>
                           </div>
                         </div>
