@@ -6,13 +6,13 @@
 export const profile = {
   name: "Adesh Yearanty",
   shortName: "Adesh Yearanty",
-  role: "Full-Stack Engineer (Distributed Systems & AWS)",
+  role: "Associate Full-Stack Engineer (Distributed Systems & AWS)",
   company: "Miraki Technologies",
   product: "SalesAstra",
   productUrl: "https://salesastra.ai",
   location: "Hyderabad, India",
   tagline:
-    "Associate Full Stack Engineer with 1.5+ years of experience building production-grade multi-tenant SaaS platforms using NestJS, Next.js, and AWS. Experienced in designing event-driven microservices, real-time messaging systems, fine-grained RBAC, AI-assisted workflows, infrastructure automation, and cloud-native architectures. Passionate about building scalable backend systems that remain reliable under high throughput.",
+    "Associate Full-Stack Engineer designing and building production-grade multi-tenant SaaS platforms with NestJS, Next.js, and AWS. Focused on the system boundaries that keep distributed architectures correct under concurrency and failure — from event-driven messaging pipelines and tenant isolation to fine-grained authorization and deterministic workflow execution.",
   email: "adesh.yearanty@gmail.com",
   phone: "+91 92811 73006",
 } as const;
@@ -38,42 +38,42 @@ export const navLinks = [
 
 /** Hero signal chips. */
 export const signals = [
-  { label: "Full-stack", detail: "NestJS, Next.js, and everything between" },
-  { label: "Event-driven", detail: "Kinesis, SQS, Lambda, WebSockets" },
-  { label: "Multi-tenant", detail: "Isolation, RBAC, branding at scale" },
-  { label: "Cloud-native", detail: "AWS, Terraform, CI/CD" },
+  { label: "Full-stack", detail: "NestJS microservices, Next.js, and distributed state" },
+  { label: "Event-driven", detail: "Kinesis, Lambda, asynchronous workflows, WebSockets" },
+  { label: "Multi-tenant", detail: "Tenant isolation, graph RBAC, and secure impersonation" },
+  { label: "Cloud-native", detail: "AWS, Terraform, and automated CI/CD pipelines" },
 ] as const;
 
 /** Home: what I do. */
 export const capabilities = [
   {
     title: "Systems & architecture",
-    body: "Designing service boundaries, event flows, and data models that stay legible as products and teams grow.",
+    body: "Designing service boundaries, event-driven message flows, and state ownership models that preserve tenant isolation, consistency boundaries, and workflow correctness under failure.",
     stack: "Event-driven · Microservices · Multi-tenant",
   },
   {
     title: "Cloud & infrastructure",
-    body: "Repeatable, observable infrastructure — Lambda functions, ECS clusters, API Gateways, and IaC that deploys with one command.",
+    body: "Provisioning reproducible, observable AWS environments — Lambda workers, ECS services, Kinesis streams, OpenSearch clusters, and API Gateways automated with Terraform and CI/CD.",
     stack: "AWS · Terraform · GitHub Actions",
   },
   {
     title: "Backend engineering",
-    body: "High-throughput NestJS services with careful attention to ordering guarantees, caching strategy, and failure modes.",
+    body: "Engineering high-throughput NestJS services with strict conversation ordering, idempotent event handling, version-based caching, and fine-grained authorization layers.",
     stack: "NestJS · Node.js · MongoDB · Redis",
   },
   {
     title: "Product interfaces",
-    body: "Real-time frontends that feel fast — messaging UIs, RBAC admin screens, and branding configuration built in Next.js.",
+    body: "Building responsive, real-time frontends in Next.js — live omnichannel messaging consoles, graph-based RBAC administration, and multi-tenant workspace configurations.",
     stack: "Next.js · React · TypeScript",
   },
 ] as const;
 
 /** Home: by the numbers. */
 export const metrics = [
-  { value: "50+", label: "Features & modules shipped to production" },
-  { value: "6", label: "AWS services owned end-to-end" },
-  { value: "3", label: "Messaging channels integrated (WhatsApp, Instagram, Messenger)" },
-  { value: "1.5", label: "Years in production engineering" },
+  { value: "4", label: "Unified messaging channels (WhatsApp, Instagram, Messenger, Web Chat)" },
+  { value: "50+", label: "Features & modules shipped to production across SalesAstra" },
+  { value: "Multi-tenant", label: "Platform isolation, graph RBAC & cross-tenant impersonation" },
+  { value: "1.5+", label: "Years in production distributed systems engineering" },
 ] as const;
 
 /** Work: SalesAstra split into 3 thematic case studies. */
@@ -81,53 +81,56 @@ export const projects = [
   {
     slug: "omni-channel-messaging",
     title: "SalesAstra — Omni-Channel Messaging Pipeline",
-    summary: "Event-driven message pipeline",
+    summary: "Pulse: Distributed messaging architecture",
     description:
-      "Unified WhatsApp, Instagram, Messenger, and a custom web chatbot into a single event-driven ingestion pipeline. Ingress Lambda validates and publishes to Kinesis; Consumer Lambda normalises payloads across channels into a unified schema; outbound routes back through Meta Graph API. Message ordering guaranteed per conversation via tenant + phone-number partitioning key.",
+      "Unified WhatsApp, Instagram, Messenger, and a custom web chatbot into a single event-driven ingestion pipeline powered by Amazon Kinesis. Ingress Lambdas validate incoming webhooks and stream raw events; Consumer Lambdas normalize provider payloads into a unified canonical schema; pulse-service serves as the authoritative system of record backed by MongoDB. Messages project immediately to agent consoles over Socket.IO, while outbound messages flow through Kinesis to a dedicated Dispatcher for Meta Graph API delivery and asynchronous reconciliation. Message sequencing is strictly preserved via tenant and conversation partitioning.",
     decisions: [
-      "Chose Kinesis over SQS so ordering is guaranteed per conversation",
-      "Normalized four channel payloads into a single message schema",
-      "Outbound routes back through Meta Graph API or live WebSocket",
+      "Chose Kinesis over SQS to guarantee strict conversation sequencing through tenant and phone partition keys",
+      "Established pulse-service as the sole authoritative system of record, separating internal state ownership from external delivery",
+      "Decoupled fast-path Socket.IO UI updates from asynchronous media hydration, AI summarization, and webhook reconciliation",
+      "Enforced monotonic state machines and idempotency constraints across Meta Graph API retries to make duplicate deliveries harmless",
     ],
     diagram: "messaging",
     role: "Core engineer",
     year: "2025",
     link: "https://salesastra.ai",
-    tags: ["NestJS", "AWS Lambda", "Kinesis", "SQS", "WebSockets", "Meta Graph API"],
+    tags: ["NestJS", "AWS Lambda", "Kinesis", "WebSockets", "Meta Graph API", "MongoDB", "Redis"],
   },
   {
     slug: "ai-assisted-workflows",
     title: "SalesAstra — AI-Assisted CRM Workflows",
-    summary: "Dynamic AI ↔ human routing",
+    summary: "Deterministic AI-integrated workflows",
     description:
-      "Dynamic AI-to-human conversation routing with round-robin agent assignment, AI-based session summarisation, and automatic lead attribute extraction that prefills CRM records without manual entry. External lead capture runs via an embeddable script using DOM mapping to intercept client website forms and publish structured events to SQS for async processing.",
+      "Integrated AI capabilities into deterministic application workflows where LLMs propose actions but application logic validates and authorizes state mutations. Features dynamic AI-to-human conversation routing, round-robin agent assignment, automated lead attribute extraction, and conversation summarization. WhatsApp OTP verification operates as an explicit workflow boundary gating automated CRM record mutations, while human takeover deterministically pauses automation. External lead capture intercepts client web forms and publishes structured events to SQS for asynchronous processing.",
     decisions: [
-      "AI-to-human handoff with round-robin agent assignment",
-      "AI session summarization and structured lead extraction",
-      "External form capture via DOM mapping → SQS → lead service",
+      "Treated AI output strictly as untrusted proposals, requiring application-level eligibility validation before mutating records",
+      "Established WhatsApp OTP verification as an architectural workflow boundary gating automated CRM mutations",
+      "Decoupled historical contact engagement from active conversation ownership to make human agent takeover deterministic",
+      "Designed workflow states to support intentional pauses for verification or agent takeover without treating delays as failures",
     ],
     diagram: "websocket",
     role: "Core engineer",
     year: "2025",
     link: "https://salesastra.ai",
-    tags: ["NestJS", "AWS SQS", "MongoDB", "Meta Graph API", "Next.js"],
+    tags: ["NestJS", "MongoDB", "WebSockets", "WhatsApp Business API", "AWS SQS", "Next.js"],
   },
   {
     slug: "access-control-infra",
     title: "SalesAstra — Multi-Tenant Access Control & Infra",
-    summary: "Graph-based RBAC + cloud foundation",
+    summary: "Authorization, tenancy & cloud infrastructure",
     description:
-      "Fine-grained RBAC with users, roles, teams, hierarchy, and sharing rules — scope-based visibility (All / Team / Own) enforced via a graph-based hierarchy shared across microservices. Multi-tenant branding system applies org-configured signatures and footers to all outbound email. Auth via AWS Cognito with JWT-based API Gateway authorisation. Full infrastructure provisioned with Terraform; deployments automated via GitHub Actions CI/CD. Currently building: serverless global search on AWS OpenSearch, integrated with this RBAC layer.",
+      "Engineered the security and cloud infrastructure for multi-tenant enterprise deployments. Implemented graph-based RBAC with users, roles, teams, and hierarchy traversal, enforcing scope-based visibility (All, Team, Own) consistently across microservices. Decoupled sovereign organization ownership from administrative roles to prevent privilege inversion. Built secure cross-tenant impersonation using signed tokens and a dual-header authorization overlay without exposing AWS Cognito credentials. Integrated tenant-scoped AWS OpenSearch indexes for candidate generation and duplicate detection, Redis version-based caching, and automated the entire AWS footprint with Terraform and GitHub Actions CI/CD.",
     decisions: [
-      "Scope resolution (All/Team/Own) traverses an org graph",
-      "Permission layer enforces scope on every query and search result",
-      "Per-tenant branding + full Terraform-provisioned AWS footprint",
+      "Separated sovereign organization ownership from administrative RBAC roles to prevent privilege inversion under Super Admin accounts",
+      "Implemented a dual-header authorization overlay enabling auditable administrative impersonation without Cognito credential sharing",
+      "Used tenant-scoped OpenSearch indexes for candidate generation while evaluating duplicate classification in deterministic application logic",
+      "Automated the multi-tenant AWS footprint with Terraform and GitHub Actions CI/CD for repeatable, zero-downtime deployments",
     ],
     diagram: "rbac",
     role: "Core engineer",
     year: "2025",
     link: "https://salesastra.ai",
-    tags: ["NestJS", "AWS Cognito", "Terraform", "GitHub Actions", "OpenSearch", "Next.js"],
+    tags: ["NestJS", "AWS Cognito", "Terraform", "GitHub Actions", "OpenSearch", "Redis", "Next.js"],
   },
 ] as const;
 
@@ -137,19 +140,19 @@ export type Project = (typeof projects)[number];
 export const principles = [
   {
     title: "Ordering is an architecture decision",
-    body: "I reach for Kinesis over a simple queue when conversation order actually matters, and partition by tenant and phone number so correctness holds under load — not just in the demo.",
+    body: "When conversation sequence determines business correctness, ordering cannot be treated as an afterthought. I reach for Kinesis partitioned by tenant and conversation key so sequencing guarantees hold under distributed load.",
   },
   {
-    title: "Normalize at the edge",
-    body: "Four channels, one schema. I push channel-specific quirks into a consumer that emits a unified message shape, so every downstream service stays simple and channel-agnostic.",
+    title: "Persistence is the source of truth; real-time delivery is a projection",
+    body: "The database establishes durable fact; real-time channels notify clients that state changed. Persisting before broadcasting eliminates non-atomic failure windows and ensures UI state never outranks durable data.",
   },
   {
-    title: "Enforce permissions once",
-    body: "RBAC lives in a shared permission layer, not copied into each service. Every query — including search — is filtered by the caller's resolved scope before anything is returned.",
+    title: "AI can propose; application logic authorizes",
+    body: "Model outputs are probabilistic suggestions, not permissions to mutate production records. Verification gates, tenant isolation, and duplicate checks must always live in deterministic application code.",
   },
   {
-    title: "Make invalidation boring",
-    body: "Version-based Redis keys mean cache invalidation is instant and obvious. No cache-busting gymnastics, no stale reads to chase down in production.",
+    title: "Historical state is not current ownership",
+    body: "Past contact interactions prove history, not present routing authority. Decoupling historical engagement from active session ownership prevents routing conflicts and makes human takeover deterministic.",
   },
 ] as const;
 
@@ -159,30 +162,29 @@ export const experience = [
     period: "Aug 2025 — Present",
     role: "Associate Full-Stack Engineer (Distributed Systems & AWS)",
     org: "SalesAstra Platform — Miraki Technologies",
-    body: "Own the architecture and engineering of SalesAstra's core platform. Responsible for the omni-channel messaging pipeline, real-time WebSocket layer, AI conversation workflows, RBAC system, multi-tenant branding, and infrastructure-as-code. Building the full surface area — NestJS microservices backend, Next.js frontend, and the AWS infrastructure beneath both.",
+    body: "Engineer core architecture across SalesAstra's multi-tenant platform. Responsible for the event-driven Pulse messaging pipeline, real-time WebSocket infrastructure, deterministic AI-integrated workflows, graph-based RBAC, cross-tenant impersonation, search duplicate detection, and automated cloud infrastructure across NestJS, Next.js, and AWS.",
     highlights: [
-      "Designed and implemented an event-driven omni-channel messaging platform supporting WhatsApp, Instagram, Messenger, and Web Chatbot using AWS Lambda, Kinesis, SQS, and NestJS, ensuring ordered message delivery through tenant and conversation partitioning.",
-      "Engineered a production-grade multi-tenant CRM platform with tenant-specific databases, isolated configurations, branding, and workspace-level security supporting enterprise SaaS deployments.",
-      "Designed and implemented secure cross-tenant impersonation architecture allowing platform administrators to operate as tenant users using signed impersonation tokens, dual-header authentication, permission validation, and complete audit traceability without exposing Cognito credentials.",
-      "Designed graph-based Role Based Access Control supporting hierarchy traversal, sharing rules, and permission scopes (All, Team, Own), consistently enforced across multiple microservices.",
-      "Built AI-assisted CRM workflows including AI-to-human routing, round-robin agent assignment, automated lead extraction, and conversation summarization.",
-      "Developed real-time communication infrastructure using NestJS WebSockets for session management, read receipts, typing indicators, and live messaging across channels.",
-      "Implemented secure authentication using AWS Cognito, JWT authorization, and API Gateway security with token refresh mechanisms.",
-      "Provisioned AWS infrastructure using Terraform and GitHub Actions covering ECS, Lambda, Kinesis, Cognito, API Gateway, ElastiCache, S3, and OpenSearch with automated deployments.",
-      "Implemented Redis version-based cache invalidation strategy reducing stale reads while simplifying cache consistency across distributed services.",
-      "Integrated Meta Graph API, WhatsApp Business API, Facebook Login, Razorpay, and Google Analytics into production applications.",
-      "Delivered 50+ production features spanning CRM modules, messaging platform, partner management, branding, security policies, work schedules, impersonation, organization management, chatbot enhancements, and infrastructure improvements across the SalesAstra platform."
+      "Designed and built the event-driven Pulse messaging pipeline unifying WhatsApp, Instagram, Messenger, and Web Chat using AWS Lambda, Kinesis, and NestJS, enforcing strict per-conversation message ordering and canonical schema normalization.",
+      "Architected a multi-tenant isolation model with tenant-scoped databases, isolated configuration, and multi-tenant OpenSearch indexing to guarantee complete data segregation across shared SaaS infrastructure.",
+      "Implemented secure administrative impersonation using signed tokens and a dual-header authentication overlay, allowing auditable cross-tenant access without exposing underlying AWS Cognito credentials.",
+      "Engineered a graph-based Role-Based Access Control (RBAC) engine supporting org hierarchy traversal and scope-based permissions (All, Team, Own), consistently evaluated across all microservices.",
+      "Built deterministic AI-assisted CRM workflows with WhatsApp OTP verification boundaries, automated lead extraction, and AI-to-human routing with round-robin assignment, ensuring AI output cannot bypass application authorization.",
+      "Developed real-time communication infrastructure using NestJS WebSockets (Socket.IO) for instant UI delivery, session state management, typing indicators, and read receipts, decoupled from asynchronous background processing.",
+      "Built provider delivery reconciliation mechanisms handling Meta Graph API asynchronous webhooks and monotonic state machines to prevent message loss and out-of-order status updates.",
+      "Implemented duplicate candidate generation and search using tenant-scoped AWS OpenSearch, decoupling BM25 relevance scoring from application-level duplicate classification decisions.",
+      "Designed a version-based Redis cache invalidation strategy that eliminates stale reads and cache-busting complexity across distributed services.",
+      "Provisioned and automated cloud infrastructure using Terraform and GitHub Actions CI/CD covering ECS, Lambda, Kinesis, Cognito, API Gateway, ElastiCache, S3, and OpenSearch with zero-downtime deployments.",
     ],
   },
   {
     period: "Feb 2025 — Jul 2025",
     role: "Associate Full-Stack Developer — Intern",
     org: "Product & Client Engineering — Miraki Technologies",
-    body: "Contributed to client platforms and began building SalesAstra. Worked across the full stack — NestJS backends, Next.js frontends, AWS Lambda functions, and Razorpay integrations — across four different products in six months.",
+    body: "Contributed to client platforms and began engineering SalesAstra modules. Worked across NestJS backends, Next.js frontends, AWS Lambda functions, and third-party integrations across four production products.",
     highlights: [
-      "Engineered SalesAstra's CRM lead management module using NestJS microservices and Next.js",
-      "Resolved 50+ feature requests and production bugs across Kind India, Sohum Spa, and Vaishnaoi Group",
-      "Built and deployed contact/lead capture forms with AWS Amplify and Lambda, and integrated Razorpay payment processing for Sohum Spa",
+      "Engineered SalesAstra's initial CRM lead management module using NestJS microservices and Next.js.",
+      "Resolved 50+ production bug fixes and feature requests across client web applications including Kind India, Sohum Spa, and Vaishnaoi Group.",
+      "Built serverless contact and lead capture pipelines using AWS Amplify and Lambda, integrating Razorpay payment processing for Sohum Spa.",
     ],
   },
 ] as const;
@@ -205,11 +207,11 @@ export const techGroups = [
     items: [
       "NestJS (microservices)",
       "Node.js",
-      "Express.js",
       "REST APIs",
-      "WebSockets",
+      "WebSockets (Socket.IO)",
       "JWT",
       "OAuth",
+      "Event-driven processing",
     ],
   },
   {
@@ -220,20 +222,24 @@ export const techGroups = [
       "TypeScript",
       "TailwindCSS",
       "TanStack Query",
-      "Zustand / Redux",
+      "Zustand",
     ],
   },
   {
     title: "Databases",
-    items: ["MongoDB", "Redis (version-based caching)", "AWS OpenSearch"],
+    items: [
+      "MongoDB (primary datastore)",
+      "Redis (version-based caching)",
+      "AWS OpenSearch (search & duplicate detection)",
+    ],
   },
   {
     title: "Cloud (AWS)",
     items: [
       "ECS",
       "Lambda",
-      "Kinesis",
-      "SQS",
+      "Kinesis (core event backbone)",
+      "SQS (decoupled async tasks)",
       "API Gateway",
       "S3",
       "CloudWatch",
@@ -247,22 +253,24 @@ export const techGroups = [
   },
   {
     title: "DevOps",
-    items: ["Terraform", "GitHub Actions", "Docker", "CI/CD"],
+    items: ["Terraform (IaC)", "GitHub Actions", "Docker", "CI/CD automation"],
   },
   {
     title: "Architecture",
     items: [
-      "Microservices",
       "Distributed Systems",
-      "Multi-Tenant Architecture",
-      "Event Driven Systems",
-      "RBAC",
-      "Domain Driven Design",
-      "System Design",
-      "Caching Strategies",
-      "Message Ordering",
-      "API Design",
+      "Event-Driven Architecture",
+      "Microservices",
+      "Multi-Tenant Isolation",
+      "Graph-Based RBAC",
       "Authentication & Authorization",
+      "Workflow & State Design",
+      "Idempotency",
+      "Message Ordering",
+      "Caching Strategies",
+      "Search Architecture",
+      "System Design",
+      "API Design",
       "Infrastructure as Code",
       "Observability",
     ],
@@ -273,8 +281,8 @@ export const techGroups = [
       "Meta Graph API",
       "WhatsApp Business API",
       "Facebook Login",
-      "Google Analytics",
       "Razorpay",
+      "Google Analytics",
       "AWS Amplify",
     ],
   },

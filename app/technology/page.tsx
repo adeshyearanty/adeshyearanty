@@ -40,7 +40,7 @@ export default function TechnologyPage() {
             <span className="text-signal">not résumés.</span>
           </>
         }
-        lead="A working stack refined through shipping real systems. Every item here has earned its place in a production codebase."
+        lead="A production-tested stack refined through building distributed systems, real-time messaging pipelines, and multi-tenant SaaS platforms. Every tool and architectural concept represents verified engineering ownership."
       />
 
       <Section>
@@ -55,23 +55,46 @@ export default function TechnologyPage() {
                 } ${getTechBorderClasses(i)}`}
               >
                 <div className="grid-texture h-full bg-base p-8 sm:p-10">
-                  <div className="flex items-baseline justify-between">
-                    <h2 className="text-lg font-medium tracking-tight text-paper">
-                      {g.title}
-                    </h2>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <div className="flex items-center gap-2.5">
+                      <h2 className="text-lg font-medium tracking-tight text-paper">
+                        {g.title}
+                      </h2>
+                      {i === 6 && (
+                        <span className="rounded-full border border-signal/30 bg-signal/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-signal">
+                          Core Focus
+                        </span>
+                      )}
+                    </div>
                     <span className="font-mono text-xs text-signal tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
                   <ul className="mt-6 flex flex-wrap gap-2">
-                    {g.items.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-full border border-hairline bg-surface px-3 py-1 text-[13px] text-mist"
-                      >
-                        {item}
-                      </li>
-                    ))}
+                    {g.items.map((item) => {
+                      const match = item.match(/^(.*?)\s*(\(.*?\))$/);
+                      return (
+                        <li
+                          key={item}
+                          className={`rounded-full border border-hairline bg-surface px-3 py-1 text-[13px] text-mist transition-colors duration-200 hover:border-hairline-strong ${
+                            i === 6
+                              ? "hover:border-signal/40 hover:text-paper"
+                              : ""
+                          }`}
+                        >
+                          {match ? (
+                            <>
+                              <span className="text-paper">{match[1]}</span>{" "}
+                              <span className="font-mono text-[11px] text-slate">
+                                {match[2]}
+                              </span>
+                            </>
+                          ) : (
+                            item
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </Reveal>
