@@ -21,7 +21,7 @@ const POSTS = [
   {
     slug: "when-a-contact-isnt-a-conversation",
     title: "When a Contact Isn't a Conversation",
-    date: "Sep 2026",
+    date: "Aug 2026",
     readingTime: "11 min",
     category: "Systems",
     excerpt:
@@ -33,7 +33,7 @@ const POSTS = [
   {
     slug: "persist-first-broadcast-second",
     title: "Persist First, Broadcast Second",
-    date: "Sep 2026",
+    date: "Aug 2026",
     readingTime: "10 min",
     category: "Systems",
     excerpt:
@@ -45,7 +45,7 @@ const POSTS = [
   {
     slug: "database-transaction-doesnt-make-system-atomic",
     title: "A Database Transaction Doesn't Make Your System Atomic",
-    date: "Aug 2026",
+    date: "Jul 2026",
     readingTime: "12 min",
     category: "Systems",
     excerpt:
@@ -57,7 +57,7 @@ const POSTS = [
   {
     slug: "tenant-isolation-doesnt-end-at-the-database",
     title: "Tenant Isolation Doesn't End at the Database",
-    date: "Aug 2026",
+    date: "Jun 2026",
     readingTime: "14 min",
     category: "Architecture",
     excerpt:
@@ -69,7 +69,7 @@ const POSTS = [
   {
     slug: "similarity-is-not-probability",
     title: "Similarity Is Not Probability",
-    date: "Jul 2026",
+    date: "May 2026",
     readingTime: "11 min",
     category: "Systems",
     excerpt:
@@ -81,7 +81,7 @@ const POSTS = [
   {
     slug: "search-became-a-data-integrity-problem",
     title: "Search Became a Data Integrity Problem",
-    date: "Jun 2026",
+    date: "Apr 2026",
     readingTime: "13 min",
     category: "Architecture",
     excerpt:
@@ -93,7 +93,7 @@ const POSTS = [
   {
     slug: "ownership-is-not-a-permission",
     title: "Ownership Is Not a Permission",
-    date: "May 2026",
+    date: "Mar 2026",
     readingTime: "14 min",
     category: "Systems",
     excerpt:
@@ -105,7 +105,7 @@ const POSTS = [
   {
     slug: "who-owns-the-truth-distributed-system",
     title: "In a distributed system, who owns the truth?",
-    date: "Apr 2026",
+    date: "Feb 2026",
     readingTime: "15 min",
     category: "Architecture",
     excerpt:
@@ -117,7 +117,7 @@ const POSTS = [
   {
     slug: "exactly-once-delivery-is-a-trap",
     title: "Exactly-once delivery is a trap",
-    date: "Mar 2026",
+    date: "Jan 2026",
     readingTime: "13 min",
     category: "Systems",
     excerpt:
@@ -129,7 +129,7 @@ const POSTS = [
   {
     slug: "api-success-doesnt-mean-message-delivered",
     title: "A successful API request doesn't mean your message was delivered",
-    date: "Feb 2026",
+    date: "Dec 2025",
     readingTime: "14 min",
     category: "Systems",
     excerpt:
@@ -141,7 +141,7 @@ const POSTS = [
   {
     slug: "engagement-history-isnt-conversation-ownership",
     title: "Engagement history isn't conversation ownership",
-    date: "Jan 2026",
+    date: "Nov 2025",
     readingTime: "13 min",
     category: "Systems",
     excerpt:
@@ -153,7 +153,7 @@ const POSTS = [
   {
     slug: "ai-shouldnt-authorize-actions",
     title: "AI can suggest the action. It shouldn't authorize the action.",
-    date: "Dec 2025",
+    date: "Oct 2025",
     readingTime: "12 min",
     category: "Systems",
     excerpt:
@@ -165,7 +165,7 @@ const POSTS = [
   {
     slug: "whatsapp-otp-workflow-verification",
     title: "Why WhatsApp OTP became a workflow boundary, not just a verification step",
-    date: "Nov 2025",
+    date: "Sep 2025",
     readingTime: "11 min",
     category: "Architecture",
     excerpt:
@@ -177,7 +177,7 @@ const POSTS = [
   {
     slug: "kinesis-vs-sqs-messaging-pipeline",
     title: "Why I chose Kinesis over SQS for the messaging pipeline",
-    date: "Oct 2025",
+    date: "Sep 2025",
     readingTime: "7 min",
     category: "Architecture",
     excerpt:
@@ -200,7 +200,7 @@ const POSTS = [
   {
     slug: "designing-tenant-aware-opensearch-architecture",
     title: "Designing a tenant-aware OpenSearch architecture for search and duplicate detection",
-    date: "Jun 2025",
+    date: "Jul 2025",
     readingTime: "10 min",
     category: "Architecture",
     excerpt:
@@ -211,7 +211,7 @@ const POSTS = [
   {
     slug: "redis-version-based-caching",
     title: "Redis version-based caching: a simpler way to invalidate",
-    date: "Apr 2025",
+    date: "Jun 2025",
     readingTime: "6 min",
     category: "Backend",
     excerpt:
@@ -222,7 +222,7 @@ const POSTS = [
   {
     slug: "securing-admin-access-dual-header-impersonation",
     title: "Securing administrative access with a dual-header impersonation framework",
-    date: "Mar 2025",
+    date: "May 2025",
     readingTime: "6 min",
     category: "Systems",
     excerpt:
@@ -233,7 +233,7 @@ const POSTS = [
   {
     slug: "rbac-system-that-doesnt-lie",
     title: "Designing a RBAC system that doesn't lie to your users",
-    date: "Feb 2025",
+    date: "Apr 2025",
     readingTime: "5 min",
     category: "Systems",
     excerpt:
@@ -244,7 +244,7 @@ const POSTS = [
   {
     slug: "tenant-discovery-authentication-cognito",
     title: "When tenant discovery and authentication depend on each other",
-    date: "Jan 2025",
+    date: "Apr 2025",
     readingTime: "9 min",
     category: "Architecture",
     excerpt:
